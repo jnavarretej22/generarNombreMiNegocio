@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumen Business · Genera el nombre perfecto para tu negocio con IA</title>
+  <meta name="description" content="Generador inteligente de nombres para empresas, marcas y startups. Describe tu negocio y recibe 10 nombres al instante." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #faf3e4;
+      --cream-warm: #f3e8ce;
+      --paper: #fffaf0;
+      --ink: #1f1812;
+      --ink-soft: #5e5044;
+      --ink-mute: #9a8a78;
+      --coral: #e8826a;
+      --coral-deep: #c25034;
+      --peach: #ffc8a8;
+      --butter: #ffe6a7;
+      --sage: #9bab8f;
+      --sage-deep: #6d8265;
+      --gold: #b8893e;
+      --plum: #8b5e7a;
+      --line: #e0d3b8;
+      --shadow-sm: 0 1px 2px rgba(31,24,18,.05);
+      --shadow: 0 2px 4px rgba(31,24,18,.04), 0 16px 40px -8px rgba(31,24,18,.12);
+      --shadow-lg: 0 4px 8px rgba(31,24,18,.06), 0 32px 64px -12px rgba(31,24,18,.18);
+      --radius: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ═══ ANIMATED BACKGROUND ═══ */
+    .bg-blobs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .45; animation: bfloat 24s ease-in-out infinite; }
+    .blob-1 { width: 480px; height: 480px; background: radial-gradient(circle, rgba(139,94,122,.5), transparent 70%); top: -160px; right: -80px; }
+    .blob-2 { width: 420px; height: 420px; background: radial-gradient(circle, var(--butter), transparent 70%); top: 50%; left: -140px; animation-delay: -9s; }
+    .blob-3 { width: 360px; height: 360px; background: radial-gradient(circle, rgba(155,171,143,.5), transparent 70%); bottom: -100px; right: 20%; animation-delay: -16s; }
+    @keyframes bfloat {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33%     { transform: translate(35px,-25px) scale(1.04); }
+      66%     { transform: translate(-25px,25px) scale(.96); }
+    }
+
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 24px 24px 96px; position: relative; z-index: 1; }
+
+    /* ═══ NAV ═══ */
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 8px 0 24px; }
+    .logo { font-family: var(--font-display); font-weight: 600; font-size: 1.45rem; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; }
+    .logo-mark { width: 36px; height: 36px; background: var(--ink); color: var(--cream); border-radius: 8px; display: grid; place-items: center; font-family: var(--font-display); font-style: italic; font-size: 1.1rem; font-weight: 500; }
+    .logo small { font-size: .7rem; font-weight: 400; color: var(--ink-mute); letter-spacing: .08em; text-transform: uppercase; }
+    .nav-fav { display: flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--paper); border: 1px solid var(--line); border-radius: 100px; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--ink); transition: all .25s; font-family: var(--font-body); }
+    .nav-fav:hover { border-color: var(--coral); background: white; transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+    .nav-fav .heart { color: var(--coral-deep); font-size: 14px; }
+    .nav-fav-count { background: var(--coral); color: white; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px; min-width: 22px; text-align: center; }
+
+    /* ═══ HERO ═══ */
+    .hero { text-align: center; padding: 48px 0 56px; position: relative; }
+    .badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,250,240,.8); backdrop-filter: blur(8px); border: 1px solid var(--line); border-radius: 100px; font-size: 12px; font-weight: 500; color: var(--ink-soft); letter-spacing: .04em; margin-bottom: 28px; }
+    .badge-dot { width: 6px; height: 6px; background: var(--sage-deep); border-radius: 50%; box-shadow: 0 0 0 4px rgba(109,130,101,.2); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 4px rgba(109,130,101,.2); } 50% { box-shadow: 0 0 0 8px rgba(109,130,101,.05); } }
+    h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.4rem,7vw,5rem); line-height: 1.04; letter-spacing: -0.035em; }
+    h1 .rotator { display: inline-block; position: relative; height: 1.05em; vertical-align: bottom; min-width: 260px; }
+    h1 .rotator span { display: inline-block; font-style: italic; font-weight: 300; background: linear-gradient(120deg, var(--plum), var(--coral-deep) 50%, var(--gold)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; position: absolute; left: 50%; top: 0; transform: translateX(-50%); white-space: nowrap; animation: wr 16s infinite; }
+    h1 .rotator span:nth-child(1) { animation-delay: 0s; }
+    h1 .rotator span:nth-child(2) { animation-delay: 4s; }
+    h1 .rotator span:nth-child(3) { animation-delay: 8s; }
+    h1 .rotator span:nth-child(4) { animation-delay: 12s; }
+    @keyframes wr {
+      0%,1%   { opacity: 0; transform: translateX(-50%) translateY(30px); }
+      4%,22%  { opacity: 1; transform: translateX(-50%) translateY(0); }
+      25%,100%{ opacity: 0; transform: translateX(-50%) translateY(-30px); }
+    }
+    .lead { max-width: 540px; margin: 22px auto 0; color: var(--ink-soft); font-size: 1.05rem; line-height: 1.6; }
+
+    /* ═══ API KEY ═══ */
+    .key-panel { max-width: 780px; margin: 0 auto 20px; background: rgba(255,250,240,.85); backdrop-filter: blur(10px); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 20px; }
+    .key-panel summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; font-size: 13px; font-weight: 500; color: var(--ink-soft); }
+    .key-panel summary::-webkit-details-marker { display: none; }
+    .key-status { display: inline-flex; align-items: center; gap: 10px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 3px rgba(232,130,106,.2); }
+    .dot.ok { background: var(--sage-deep); box-shadow: 0 0 0 3px rgba(109,130,101,.2); }
+    .chev { color: var(--coral-deep); transition: transform .3s; font-size: 16px; }
+    .key-panel[open] .chev { transform: rotate(180deg); }
+    .key-row { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+    .key-row input { flex: 1; min-width: 220px; padding: 11px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--cream); font-family: 'SF Mono', Menlo, monospace; font-size: 13px; color: var(--ink); outline: none; }
+    .key-row input:focus { border-color: var(--coral-deep); }
+    .key-row button { padding: 11px 20px; background: var(--ink); color: var(--cream); border: none; border-radius: 10px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: var(--font-body); }
+    .key-row button:hover { background: var(--coral-deep); }
+    .key-hint { font-size: 12px; color: var(--ink-mute); margin-top: 10px; line-height: 1.5; }
+    .key-hint a { color: var(--coral-deep); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ═══ FORM CARD ═══ */
+    .form-card { max-width: 780px; margin: 0 auto; background: var(--paper); border-radius: var(--radius-xl); padding: 40px; box-shadow: var(--shadow); border: 1px solid rgba(224,211,184,.5); position: relative; }
+    .form-card::before { content: '◆'; position: absolute; top: 20px; right: 24px; color: var(--plum); opacity: .35; font-size: 18px; }
+
+    /* Mode tabs */
+    .mode-tabs { display: inline-flex; gap: 0; background: var(--cream); border-radius: 100px; padding: 4px; margin-bottom: 28px; border: 1px solid var(--line); }
+    .mode-tab { padding: 9px 20px; border: none; background: transparent; font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--ink-soft); border-radius: 100px; cursor: pointer; transition: all .25s; }
+    .mode-tab:hover { color: var(--ink); }
+    .mode-tab.active { background: var(--ink); color: var(--cream); box-shadow: 0 2px 6px rgba(31,24,18,.15); }
+    .mode-tab .tab-ico { margin-right: 6px; opacity: .85; }
+    .mode { display: none; animation: mfade .35s ease; }
+    .mode.active { display: block; }
+    @keyframes mfade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Form label */
+    .form-label { font-family: var(--font-display); font-style: italic; font-size: 1.2rem; color: var(--ink); margin-bottom: 18px; display: block; }
+
+    /* Textarea & inputs */
+    textarea, .field-input {
+      width: 100%; padding: 16px 18px; border: 1.5px solid var(--line); border-radius: var(--radius);
+      background: var(--cream); font-family: var(--font-body); font-size: 15px; line-height: 1.55;
+      color: var(--ink); outline: none; transition: all .25s; resize: vertical;
+    }
+    textarea:focus, .field-input:focus { border-color: var(--coral-deep); box-shadow: 0 0 0 4px rgba(194,80,52,.08); background: white; }
+    textarea::placeholder, .field-input::placeholder { color: var(--ink-mute); }
+
+    /* Pills */
+    .pill { padding: 8px 16px; border: 1px solid var(--line); background: var(--cream); border-radius: 100px; font-size: 13px; color: var(--ink-soft); cursor: pointer; transition: all .2s; font-family: var(--font-body); display: inline-flex; align-items: center; gap: 6px; }
+    .pill:hover { border-color: var(--coral); color: var(--ink); transform: translateY(-1px); }
+    .pill.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+    /* Field groups */
+    .field-group { margin-bottom: 22px; }
+    .field-title { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 10px; font-weight: 500; }
+    .field-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    /* Compact fields (prefix/suffix/contains) */
+    .compact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+    .compact-field label { display: block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 8px; font-weight: 500; }
+    .compact-field input { width: 100%; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--cream); font-family: var(--font-body); font-size: 14px; color: var(--ink); outline: none; transition: all .2s; }
+    .compact-field input:focus { border-color: var(--coral-deep); background: white; }
+
+    /* Collapsible optional section */
+    .optional-toggle { display: flex; align-items: center; gap: 10px; padding: 14px 0; cursor: pointer; border: none; background: transparent; font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--ink-soft); letter-spacing: .04em; width: 100%; text-align: left; border-top: 1px dashed var(--line); margin-top: 8px; }
+    .optional-toggle:hover { color: var(--ink); }
+    .optional-toggle .opt-chev { transition: transform .3s; font-size: 12px; color: var(--coral); }
+    .optional-toggle.open .opt-chev { transform: rotate(90deg); }
+    .optional-body { display: none; padding-top: 16px; animation: mfade .35s ease; }
+    .optional-body.open { display: block; }
+
+    /* Actions */
+    .actions { margin-top: 22px; }
+    .btn-primary { width: 100%; padding: 18px 28px; background: linear-gradient(135deg, var(--ink), #3d2f23); color: var(--cream); border: none; border-radius: var(--radius); font-family: var(--font-body); font-size: 14px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; transition: all .3s; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .btn-primary::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--plum), var(--coral-deep)); opacity: 0; transition: opacity .3s; }
+    .btn-primary:hover:not(:disabled)::before { opacity: 1; }
+    .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(139,94,122,.35); }
+    .btn-primary > * { position: relative; z-index: 1; }
+    .btn-primary:disabled { opacity: .7; cursor: not-allowed; }
+    .btn-primary .spinner { display: none; width: 16px; height: 16px; border: 2px solid rgba(246,239,228,.3); border-top-color: var(--cream); border-radius: 50%; animation: spin .8s linear infinite; }
+    .btn-primary.loading .spinner { display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .error { display: none; margin-top: 20px; padding: 14px 18px; background: #fbe9e3; border-left: 3px solid var(--coral-deep); border-radius: 10px; color: #7a3b28; font-size: 14px; }
+    .error.show { display: block; }
+
+    /* ═══ RESULTS ═══ */
+    .results-wrap { margin-top: 80px; display: none; }
+    .results-wrap.show { display: block; }
+    .results-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 32px; gap: 16px; flex-wrap: wrap; }
+    .results-title { font-family: var(--font-display); font-size: clamp(1.5rem,3vw,2.1rem); font-weight: 400; letter-spacing: -0.02em; }
+    .results-title em { font-style: italic; background: linear-gradient(120deg, var(--plum), var(--coral-deep)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .results-actions { display: flex; gap: 8px; }
+    .btn-ghost { padding: 10px 16px; background: var(--paper); color: var(--ink); border: 1px solid var(--line); border-radius: 100px; font-size: 12px; font-weight: 500; letter-spacing: .04em; cursor: pointer; transition: all .2s; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); }
+    .btn-ghost:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); transform: translateY(-1px); }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .card { background: var(--paper); border-radius: var(--radius-lg); padding: 28px 24px 24px; border: 1px solid rgba(224,211,184,.6); position: relative; opacity: 0; transform: translateY(20px) scale(.98); animation: rise .6s cubic-bezier(.2,.8,.2,1) forwards; transition: transform .3s, box-shadow .3s, border-color .3s; overflow: hidden; }
+    .card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(139,94,122,.08), transparent 50%); opacity: 0; transition: opacity .3s; pointer-events: none; }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--plum); }
+    .card:hover::after { opacity: 1; }
+    @keyframes rise { to { opacity: 1; transform: translateY(0) scale(1); } }
+    .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+    .card-num { font-family: var(--font-display); font-style: italic; font-size: 12px; color: var(--plum); letter-spacing: .06em; }
+    .card-actions { display: flex; gap: 4px; position: relative; z-index: 2; }
+    .icon-btn { width: 32px; height: 32px; border: none; background: transparent; border-radius: 50%; cursor: pointer; display: grid; place-items: center; color: var(--ink-mute); transition: all .2s; font-size: 14px; font-family: var(--font-body); }
+    .icon-btn:hover { background: var(--cream-warm); color: var(--ink); }
+    .icon-btn.fav-btn.faved { color: var(--coral-deep); }
+
+    .card-name { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.9rem,3.2vw,2.5rem); line-height: 1.08; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 14px; word-break: break-word; }
+
+    /* Estilo pill — colored by type */
+    .card-estilo { display: inline-block; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; padding: 4px 11px; border-radius: 100px; margin-bottom: 14px; font-weight: 600; }
+    .estilo-neologismo   { color: var(--coral-deep); background: rgba(232,130,106,.14); }
+    .estilo-descriptivo  { color: var(--sage-deep); background: rgba(155,171,143,.18); }
+    .estilo-acronimo     { color: var(--gold); background: rgba(184,137,62,.14); }
+    .estilo-compuesto    { color: var(--plum); background: rgba(139,94,122,.14); }
+    .estilo-abstracto    { color: var(--ink-soft); background: rgba(94,80,68,.1); }
+    .estilo-default      { color: var(--ink-mute); background: rgba(224,211,184,.4); }
+
+    .card-concepto { font-size: 14px; line-height: 1.55; color: var(--ink-soft); margin-bottom: 14px; }
+    .card-domain-row { display: flex; align-items: center; gap: 10px; padding-top: 14px; border-top: 1px dashed var(--line); }
+    .card-domain { font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: var(--ink); background: var(--cream); padding: 5px 10px; border-radius: 6px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .card-verify { font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--plum); background: transparent; border: 1px solid rgba(139,94,122,.3); padding: 5px 10px; border-radius: 100px; cursor: pointer; white-space: nowrap; text-decoration: none; transition: all .2s; }
+    .card-verify:hover { background: var(--plum); color: var(--cream); border-color: var(--plum); }
+
+    /* ═══ FAVORITES DRAWER ═══ */
+    .drawer-bg { position: fixed; inset: 0; background: rgba(31,24,18,.45); backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 99; }
+    .drawer-bg.show { opacity: 1; pointer-events: auto; }
+    .drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(440px,100vw); background: var(--cream); box-shadow: var(--shadow-lg); transform: translateX(100%); transition: transform .35s cubic-bezier(.2,.8,.2,1); z-index: 100; display: flex; flex-direction: column; }
+    .drawer.show { transform: translateX(0); }
+    .drawer-header { padding: 24px 24px 16px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+    .drawer-title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; }
+    .drawer-title em { font-style: italic; color: var(--plum); }
+    .drawer-close { width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 50%; background: var(--paper); cursor: pointer; font-size: 16px; color: var(--ink); transition: all .2s; font-family: var(--font-body); }
+    .drawer-close:hover { background: var(--ink); color: var(--cream); }
+    .drawer-body { flex: 1; overflow-y: auto; padding: 20px 24px; }
+    .fav-empty { text-align: center; padding: 60px 20px; color: var(--ink-mute); }
+    .fav-empty-icon { font-size: 48px; margin-bottom: 16px; opacity: .4; }
+    .fav-empty-text { font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: var(--ink-soft); }
+    .fav-item { padding: 16px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 10px; }
+    .fav-item-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 500; margin-bottom: 4px; }
+    .fav-item-meta { font-size: 12px; color: var(--ink-mute); margin-bottom: 6px; }
+    .fav-item-domain { font-family: 'SF Mono', Menlo, monospace; font-size: 11px; color: var(--ink-soft); }
+    .fav-item-row { display: flex; justify-content: space-between; align-items: center; }
+    .drawer-footer { padding: 16px 24px 24px; border-top: 1px solid var(--line); display: flex; gap: 10px; }
+    .drawer-footer button { flex: 1; padding: 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--paper); font-size: 13px; font-weight: 500; color: var(--ink); cursor: pointer; transition: all .2s; font-family: var(--font-body); }
+    .drawer-footer button:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+    .drawer-footer button.danger:hover { background: var(--coral-deep); border-color: var(--coral-deep); }
+
+    /* ═══ TOAST ═══ */
+    .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--ink); color: var(--cream); padding: 12px 24px; border-radius: 100px; font-size: 13px; font-weight: 500; opacity: 0; transition: all .3s; pointer-events: none; z-index: 200; box-shadow: var(--shadow-lg); }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ═══ FOOTER ═══ */
+    footer { text-align: center; margin-top: 96px; padding-top: 32px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-mute); }
+    footer .footer-mark { font-family: var(--font-display); font-style: italic; font-size: 1.4rem; color: var(--ink); margin-bottom: 8px; }
+    footer span { color: var(--plum); }
+    footer a { color: var(--coral-deep); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ═══ MOBILE ═══ */
+    @media (max-width: 720px) {
+      .wrap { padding: 16px 16px 64px; }
+      .hero { padding: 24px 0 32px; }
+      .form-card { padding: 24px; border-radius: var(--radius-lg); }
+      .grid { grid-template-columns: 1fr; }
+      .compact-grid { grid-template-columns: 1fr; }
+      .results-actions { width: 100%; }
+      .results-actions .btn-ghost { flex: 1; justify-content: center; }
+      h1 .rotator { min-width: 200px; }
+      .mode-tab { padding: 8px 14px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-blobs"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
+
+  <div class="wrap">
+    <!-- ═══ NAV ═══ -->
+    <nav>
+      <div class="logo">
+        <span class="logo-mark">L</span>
+        <div><span>Lumen</span><br/><small>Business</small></div>
+      </div>
+      <button class="nav-fav" id="openFav" type="button">
+        <span class="heart">♥</span> Guardados
+        <span class="nav-fav-count" id="favCount">0</span>
+      </button>
+    </nav>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="hero">
+      <div class="badge"><span class="badge-dot"></span>Naming con IA · 10 ideas al instante</div>
+      <h1>
+        El nombre<br/>
+        <span class="rotator">
+          <span>perfecto</span><span>memorable</span><span>único</span><span>poderoso</span>
+        </span><br/>para tu negocio.
+      </h1>
+      <p class="lead">Describe tu empresa, marca o startup y nuestra IA generará diez nombres que puedes registrar como dominio hoy mismo.</p>
+    </section>
+
+    <!-- ═══ API KEY (oculto — clave integrada en servidor) ═══ -->
+    <details class="key-panel" id="keyPanel" style="display:none">
+      <summary>
+        <span class="key-status"><span class="dot" id="keyDot"></span><span id="keyLabel">API key activa · lista para usar</span></span>
+        <span class="chev">⌄</span>
+      </summary>
+      <div class="key-row">
+        <input type="password" id="apiKey" placeholder="gsk_..." autocomplete="off" spellcheck="false" />
+        <button id="saveKey" type="button">Guardar</button>
+      </div>
+    </details>
+
+    <!-- ═══ FORM ═══ -->
+    <div class="form-card">
+      <div class="mode-tabs" role="tablist">
+        <button class="mode-tab active" data-mode="describe" type="button"><span class="tab-ico">✦</span>Describir</button>
+        <button class="mode-tab" data-mode="form" type="button"><span class="tab-ico">◆</span>Formulario guiado</button>
+      </div>
+
+      <!-- ─── MODO 1: DESCRIBIR ─── -->
+      <div class="mode active" id="modeDescribe">
+        <label class="form-label" for="descPrompt">Describe tu negocio, tu visión, tu público</label>
+        <textarea id="descPrompt" rows="5" placeholder="Ej: Estoy creando una empresa de desarrollo de software en Ecuador, enfocada en soluciones cloud para pymes del sector salud. Quiero un nombre tecnológico pero cercano, fácil de recordar y que funcione como dominio .com"></textarea>
+      </div>
+
+      <!-- ─── MODO 2: FORMULARIO GUIADO ─── -->
+      <div class="mode" id="modeForm">
+        <label class="form-label">Responde y la IA hará el naming por ti</label>
+
+        <!-- Obligatorios -->
+        <div class="field-group">
+          <div class="field-title">¿Qué hace tu negocio? *</div>
+          <textarea id="fWhat" rows="2" placeholder="Ej: Vendemos café de especialidad en grano, tostado artesanal"></textarea>
+        </div>
+        <div class="field-group">
+          <div class="field-title">¿Quién es tu cliente ideal? *</div>
+          <input class="field-input" id="fWho" placeholder="Ej: Jóvenes profesionales de 25-40 años, urbanos" />
+        </div>
+        <div class="field-group">
+          <div class="field-title">Industria / Sector *</div>
+          <div class="field-row" id="industryRow">
+            <button class="pill" data-ind="Tecnología" type="button">Tecnología</button>
+            <button class="pill" data-ind="Salud" type="button">Salud</button>
+            <button class="pill" data-ind="Alimentación" type="button">Alimentación</button>
+            <button class="pill" data-ind="Moda" type="button">Moda</button>
+            <button class="pill" data-ind="Educación" type="button">Educación</button>
+            <button class="pill" data-ind="Finanzas" type="button">Finanzas</button>
+            <button class="pill" data-ind="Construcción" type="button">Construcción</button>
+            <button class="pill" data-ind="Entretenimiento" type="button">Entretenimiento</button>
+            <button class="pill" data-ind="Consultoría" type="button">Consultoría</button>
+            <button class="pill" data-ind="E-commerce" type="button">E-commerce</button>
+          </div>
+          <input class="field-input" id="fIndOther" placeholder="O escribe tu sector…" style="margin-top:10px" />
+        </div>
+
+        <!-- Opcionales (colapsable) -->
+        <button class="optional-toggle" id="optToggle" type="button">
+          <span class="opt-chev">▸</span> Personalizar el nombre (opcional)
+        </button>
+        <div class="optional-body" id="optBody">
+          <div class="field-group">
+            <div class="field-title">Tono / Personalidad</div>
+            <div class="field-row" id="toneRow">
+              <button class="pill" data-tone="Profesional" type="button">Profesional</button>
+              <button class="pill" data-tone="Moderno" type="button">Moderno</button>
+              <button class="pill" data-tone="Divertido" type="button">Divertido</button>
+              <button class="pill" data-tone="Elegante" type="button">Elegante</button>
+              <button class="pill" data-tone="Minimalista" type="button">Minimalista</button>
+              <button class="pill" data-tone="Audaz" type="button">Audaz</button>
+              <button class="pill" data-tone="Confiable" type="button">Confiable</button>
+              <button class="pill" data-tone="Innovador" type="button">Innovador</button>
+              <button class="pill" data-tone="Artesanal" type="button">Artesanal</button>
+              <button class="pill" data-tone="Premium" type="button">Premium</button>
+            </div>
+          </div>
+          <div class="compact-grid">
+            <div class="compact-field"><label>Debe empezar con…</label><input id="fPrefix" placeholder="ej: ec" maxlength="10" /></div>
+            <div class="compact-field"><label>Debe terminar con…</label><input id="fSuffix" placeholder="ej: corp, labs" maxlength="15" /></div>
+            <div class="compact-field"><label>Debe contener…</label><input id="fContains" placeholder="ej: cloud" maxlength="20" /></div>
+          </div>
+          <div class="field-group">
+            <div class="field-title">Longitud preferida</div>
+            <div class="field-row" id="lenRow">
+              <button class="pill" data-len="Corto (1 palabra, máximo 7 letras)" type="button">Corto</button>
+              <button class="pill" data-len="Medio (1-2 palabras)" type="button">Medio</button>
+              <button class="pill" data-len="Largo / descriptivo" type="button">Largo</button>
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field-title">Idioma base</div>
+            <div class="field-row" id="langRow">
+              <button class="pill" data-lang="Español" type="button">Español</button>
+              <button class="pill" data-lang="Inglés" type="button">Inglés</button>
+              <button class="pill" data-lang="Neologismo / inventado" type="button">Neologismo</button>
+              <button class="pill" data-lang="Mixto" type="button">Mixto</button>
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field-title">Palabras a evitar</div>
+            <input class="field-input" id="fAvoid" placeholder="Ej: solutions, global, synergy (separadas por coma)" />
+          </div>
+          <div class="field-group">
+            <div class="field-title">Marcas que admiras (referentes)</div>
+            <input class="field-input" id="fRefs" placeholder="Ej: Stripe, Notion, Figma" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón generar (compartido) -->
+      <div class="actions">
+        <button class="btn-primary" id="generateBtn" type="button">
+          <span class="spinner"></span>
+          <span class="label">◆ Generar 10 nombres</span>
+        </button>
+      </div>
+      <div class="error" id="errorBox"></div>
+    </div>
+
+    <!-- ═══ RESULTS ═══ -->
+    <section class="results-wrap" id="resultsWrap">
+      <div class="results-header">
+        <h2 class="results-title">Diez <em>nombres</em> para tu negocio</h2>
+        <div class="results-actions">
+          <button class="btn-ghost" id="copyBtn" type="button">⎘ Copiar</button>
+          <button class="btn-ghost" id="regenBtn" type="button">↻ Regenerar</button>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <footer>
+      <div class="footer-mark">Lumen Business</div>
+      Hecho con <span>♡</span> · Impulsado por Groq + Llama 4 Scout<br/>
+      <a href="index.html">¿Buscas nombres de bebé? → Lumen Baby</a>
+    </footer>
+  </div>
+
+  <!-- ═══ FAVORITES DRAWER ═══ -->
+  <div class="drawer-bg" id="drawerBg"></div>
+  <aside class="drawer" id="drawer">
+    <div class="drawer-header">
+      <div class="drawer-title">Nombres <em>guardados</em></div>
+      <button class="drawer-close" id="closeFav" type="button">✕</button>
+    </div>
+    <div class="drawer-body" id="favList"></div>
+    <div class="drawer-footer">
+      <button id="copyFavs" type="button">Copiar lista</button>
+      <button class="danger" id="clearFavs" type="button">Limpiar todo</button>
+    </div>
+  </aside>
+  <div class="toast" id="toast"></div>
+
+<script>
+// ════════════════════════════════════════════════════════
+// CONFIG
+// ════════════════════════════════════════════════════════
+const GROQ_ENDPOINT = '/api/generate';
+const STORAGE_KEY = 'groq_api_key_baby_names';
+const FAVS_KEY = 'lumen_business_favorites';
+
+// ── System prompt: modo Describir ──
+const SP_DESCRIBE = `Eres un experto en branding, naming empresarial y estrategia de marca con más de 20 años de experiencia.
+
+El usuario describirá su negocio en lenguaje natural. Tu tarea es generar EXACTAMENTE 10 nombres de negocio únicos, creativos y registrables.
+
+REGLAS:
+1. Exactamente 10 nombres, todos únicos.
+2. Diversifica los estilos: incluye al menos 3 estilos diferentes entre Neologismo, Descriptivo, Acrónimo, Compuesto, Abstracto.
+3. Cada nombre debe ser corto, memorable, fácil de pronunciar y potencialmente registrable como dominio.
+4. En "concepto", explica brevemente la idea detrás del nombre y por qué encaja con el negocio descrito.
+5. En "dominio", sugiere la extensión más plausible (nombre.com, nombre.io, nombre.co, nombre.app, etc.) — es solo una sugerencia, no verificas disponibilidad.
+6. En "estilo", clasifica el nombre: Neologismo, Descriptivo, Acrónimo, Compuesto o Abstracto.
+7. Responde en el mismo idioma que el usuario.
+8. Devuelve SOLO un JSON válido con esta estructura:
+
+{
+  "nombres": [
+    {
+      "nombre": "string",
+      "estilo": "string (Neologismo|Descriptivo|Acrónimo|Compuesto|Abstracto)",
+      "concepto": "string (máximo 2 líneas)",
+      "dominio": "string (ej: miempresa.com)"
+    }
+  ]
+}
+
+No incluyas texto fuera del JSON.`;
+
+// ── System prompt: modo Formulario guiado ──
+const SP_FORM = `Eres un experto en branding, naming empresarial y estrategia de marca con más de 20 años de experiencia.
+
+Se te proporcionará un briefing estructurado con información sobre un negocio y preferencias para el nombre. Tu tarea es generar EXACTAMENTE 10 nombres que cumplan TODAS las restricciones indicadas.
+
+REGLAS ESTRICTAS:
+1. Exactamente 10 nombres únicos.
+2. Si el briefing especifica que el nombre debe empezar con ciertas letras, TODOS los nombres deben cumplirlo.
+3. Si especifica que debe terminar con cierto sufijo, TODOS deben cumplirlo.
+4. Si especifica que debe contener cierta palabra o sílaba, TODOS deben incluirla.
+5. Si indica longitud (corto/medio/largo), respétala.
+6. Si indica idioma base, genera nombres en ese idioma o estilo.
+7. Si lista palabras a evitar, NINGÚN nombre debe contenerlas ni evocarlas.
+8. Si menciona marcas de referencia, inspírate en su estilo (no copies).
+9. Si alguna combinación de restricciones hace casi imposible generar 10 nombres, genera los que puedas y explica en "concepto" por qué ajustaste.
+10. En "dominio", sugiere la extensión más plausible.
+11. En "estilo", clasifica: Neologismo, Descriptivo, Acrónimo, Compuesto o Abstracto.
+12. Responde en español.
+13. Devuelve SOLO JSON:
+
+{
+  "nombres": [
+    {
+      "nombre": "string",
+      "estilo": "string (Neologismo|Descriptivo|Acrónimo|Compuesto|Abstracto)",
+      "concepto": "string (máximo 2 líneas, incluye cómo cumple las restricciones)",
+      "dominio": "string"
+    }
+  ]
+}
+
+No incluyas texto fuera del JSON.`;
+
+// ════════════════════════════════════════════════════════
+// DOM
+// ════════════════════════════════════════════════════════
+const $ = id => document.getElementById(id);
+const descPrompt = $('descPrompt');
+const generateBtn = $('generateBtn');
+const errorBox = $('errorBox');
+const resultsWrap = $('resultsWrap');
+const grid = $('grid');
+const regenBtn = $('regenBtn');
+const copyBtn = $('copyBtn');
+const toast = $('toast');
+const favCountEl = $('favCount');
+const openFavBtn = $('openFav');
+const closeFavBtn = $('closeFav');
+const drawer = $('drawer');
+const drawerBg = $('drawerBg');
+const favList = $('favList');
+const copyFavsBtn = $('copyFavs');
+const clearFavsBtn = $('clearFavs');
+const keyPanel = $('keyPanel');
+const apiKeyInput = $('apiKey');
+const saveKeyBtn = $('saveKey');
+const keyDot = $('keyDot');
+const keyLabel = $('keyLabel');
+const optToggle = $('optToggle');
+const optBody = $('optBody');
+
+let currentMode = 'describe';
+let lastPrompt = '';
+let lastSP = SP_DESCRIBE;
+let lastResults = [];
+let favorites = loadFavs();
+
+// Multi-select states
+let selectedIndustries = new Set();
+let selectedTones = new Set();
+let selectedLen = null;
+let selectedLang = null;
+
+// ════════════════════════════════════════════════════════
+// API KEY
+// ════════════════════════════════════════════════════════
+function loadKey() {
+  keyDot.classList.add('ok');
+  keyLabel.textContent = 'API key activa · lista para usar';
+}
+saveKeyBtn.addEventListener('click', () => {
+  keyPanel.open = false; hideError();
+});
+
+// ════════════════════════════════════════════════════════
+// MODE TABS
+// ════════════════════════════════════════════════════════
+document.querySelectorAll('.mode-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentMode = tab.dataset.mode;
+    $('modeDescribe').classList.toggle('active', currentMode === 'describe');
+    $('modeForm').classList.toggle('active', currentMode === 'form');
+    hideError();
+  });
+});
+
+// ════════════════════════════════════════════════════════
+// OPTIONAL TOGGLE (collapsible)
+// ════════════════════════════════════════════════════════
+optToggle.addEventListener('click', () => {
+  optToggle.classList.toggle('open');
+  optBody.classList.toggle('open');
+});
+
+// ════════════════════════════════════════════════════════
+// PILL HANDLERS
+// ════════════════════════════════════════════════════════
+// Multi-select: Industry
+document.querySelectorAll('#industryRow .pill').forEach(p => {
+  p.addEventListener('click', () => {
+    const v = p.dataset.ind;
+    if (selectedIndustries.has(v)) { selectedIndustries.delete(v); p.classList.remove('active'); }
+    else { selectedIndustries.add(v); p.classList.add('active'); }
+  });
+});
+// Multi-select: Tone
+document.querySelectorAll('#toneRow .pill').forEach(p => {
+  p.addEventListener('click', () => {
+    const v = p.dataset.tone;
+    if (selectedTones.has(v)) { selectedTones.delete(v); p.classList.remove('active'); }
+    else { selectedTones.add(v); p.classList.add('active'); }
+  });
+});
+// Single-select: Length
+document.querySelectorAll('#lenRow .pill').forEach(p => {
+  p.addEventListener('click', () => {
+    const v = p.dataset.len;
+    if (selectedLen === v) { selectedLen = null; p.classList.remove('active'); }
+    else { selectedLen = v; document.querySelectorAll('#lenRow .pill').forEach(x => x.classList.remove('active')); p.classList.add('active'); }
+  });
+});
+// Single-select: Language
+document.querySelectorAll('#langRow .pill').forEach(p => {
+  p.addEventListener('click', () => {
+    const v = p.dataset.lang;
+    if (selectedLang === v) { selectedLang = null; p.classList.remove('active'); }
+    else { selectedLang = v; document.querySelectorAll('#langRow .pill').forEach(x => x.classList.remove('active')); p.classList.add('active'); }
+  });
+});
+
+// ════════════════════════════════════════════════════════
+// BUILD FORM PROMPT
+// ════════════════════════════════════════════════════════
+function buildFormPrompt() {
+  const what = $('fWhat').value.trim();
+  const who = $('fWho').value.trim();
+  const indOther = $('fIndOther').value.trim();
+  const industries = [...selectedIndustries];
+  if (indOther) industries.push(indOther);
+
+  if (!what) throw new Error('Describe qué hace tu negocio (campo obligatorio).');
+  if (!who) throw new Error('Indica quién es tu cliente ideal (campo obligatorio).');
+  if (industries.length === 0) throw new Error('Selecciona al menos una industria o escríbela.');
+
+  let p = `BRIEFING DEL NEGOCIO:\n`;
+  p += `- Qué hace: ${what}\n`;
+  p += `- Cliente ideal: ${who}\n`;
+  p += `- Industria: ${industries.join(', ')}\n`;
+
+  const tones = [...selectedTones];
+  if (tones.length) p += `\nTONO DESEADO: ${tones.join(', ')}`;
+
+  const prefix = $('fPrefix').value.trim();
+  const suffix = $('fSuffix').value.trim();
+  const contains = $('fContains').value.trim();
+  if (prefix) p += `\nRESTRICCIÓN — El nombre DEBE empezar con: "${prefix}"`;
+  if (suffix) p += `\nRESTRICCIÓN — El nombre DEBE terminar con: "${suffix}"`;
+  if (contains) p += `\nRESTRICCIÓN — El nombre DEBE contener: "${contains}"`;
+  if (selectedLen) p += `\nLONGITUD PREFERIDA: ${selectedLen}`;
+  if (selectedLang) p += `\nIDIOMA BASE: ${selectedLang}`;
+
+  const avoid = $('fAvoid').value.trim();
+  if (avoid) p += `\nPALABRAS A EVITAR: ${avoid}`;
+
+  const refs = $('fRefs').value.trim();
+  if (refs) p += `\nMARCAS DE REFERENCIA (inspiración, no copiar): ${refs}`;
+
+  return p;
+}
+
+// ════════════════════════════════════════════════════════
+// UI HELPERS
+// ════════════════════════════════════════════════════════
+function showError(m) { errorBox.textContent = m; errorBox.classList.add('show'); }
+function hideError() { errorBox.classList.remove('show'); }
+function setLoading(on) {
+  generateBtn.disabled = on;
+  generateBtn.classList.toggle('loading', on);
+  generateBtn.querySelector('.label').textContent = on ? 'Generando…' : '◆ Generar 10 nombres';
+}
+function showToast(m) { toast.textContent = m; toast.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(() => toast.classList.remove('show'), 2400); }
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+
+// ════════════════════════════════════════════════════════
+// GROQ API
+// ════════════════════════════════════════════════════════
+async function callGroq(prompt, sp) {
+  const res = await fetch(GROQ_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      messages: [{ role: 'system', content: sp }, { role: 'user', content: prompt }],
+      temperature: 0.9, max_tokens: 2000,
+      response_format: { type: 'json_object' }
+    })
+  });
+  if (!res.ok) {
+    if (res.status === 401) throw new Error('API key inválida. Verifícala en console.groq.com/keys.');
+    if (res.status === 429) throw new Error('Límite de peticiones. Espera unos segundos.');
+    throw new Error(`Error de API (${res.status}).`);
+  }
+  const data = await res.json();
+  const content = data?.choices?.[0]?.message?.content;
+  if (!content) throw new Error('Respuesta vacía. Intenta de nuevo.');
+  let parsed;
+  try { parsed = JSON.parse(content); } catch { throw new Error('Respuesta no válida. Intenta de nuevo.'); }
+  if (!Array.isArray(parsed.nombres) || !parsed.nombres.length) throw new Error('No se obtuvieron nombres.');
+  return parsed.nombres;
+}
+
+// ════════════════════════════════════════════════════════
+// RENDER RESULTS
+// ════════════════════════════════════════════════════════
+function estiloClass(estilo) {
+  const e = (estilo || '').toLowerCase();
+  if (e.includes('neologismo')) return 'estilo-neologismo';
+  if (e.includes('descriptivo')) return 'estilo-descriptivo';
+  if (e.includes('acr')) return 'estilo-acronimo';
+  if (e.includes('compuesto')) return 'estilo-compuesto';
+  if (e.includes('abstracto')) return 'estilo-abstracto';
+  return 'estilo-default';
+}
+
+function renderResults(nombres) {
+  grid.innerHTML = '';
+  nombres.slice(0, 10).forEach((n, i) => {
+    const isFav = isFavorite(n.nombre);
+    const domainClean = (n.dominio || n.nombre + '.com').replace(/https?:\/\//g,'').toLowerCase();
+    const verifyUrl = `https://www.namecheap.com/domains/registration/results/?domain=${encodeURIComponent(domainClean)}`;
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.style.animationDelay = `${i * 70}ms`;
+    card.innerHTML = `
+      <div class="card-top">
+        <span class="card-num">N.º ${String(i+1).padStart(2,'0')}</span>
+        <div class="card-actions">
+          <button class="icon-btn fav-btn ${isFav?'faved':''}" data-idx="${i}" data-name="${esc(n.nombre)}" aria-label="Guardar" type="button">${isFav?'♥':'♡'}</button>
+        </div>
+      </div>
+      <div class="card-name">${esc(n.nombre)}</div>
+      <span class="card-estilo ${estiloClass(n.estilo)}">${esc(n.estilo || 'General')}</span>
+      <p class="card-concepto">${esc(n.concepto || '')}</p>
+      <div class="card-domain-row">
+        <span class="card-domain">${esc(domainClean)}</span>
+        <a class="card-verify" href="${verifyUrl}" target="_blank" rel="noopener">Verificar →</a>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  // Wire fav buttons
+  grid.querySelectorAll('.fav-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const idx = +btn.dataset.idx;
+      toggleFavorite(lastResults[idx]);
+      const nowFav = isFavorite(btn.dataset.name);
+      btn.classList.toggle('faved', nowFav);
+      btn.textContent = nowFav ? '♥' : '♡';
+    });
+  });
+
+  resultsWrap.classList.add('show');
+  setTimeout(() => resultsWrap.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+// ════════════════════════════════════════════════════════
+// FAVORITES
+// ════════════════════════════════════════════════════════
+function loadFavs() { try { return JSON.parse(localStorage.getItem(FAVS_KEY)) || []; } catch { return []; } }
+function saveFavs() { localStorage.setItem(FAVS_KEY, JSON.stringify(favorites)); favCountEl.textContent = favorites.length; }
+function isFavorite(name) { return favorites.some(f => f.nombre === name); }
+function toggleFavorite(n) {
+  if (isFavorite(n.nombre)) { favorites = favorites.filter(f => f.nombre !== n.nombre); showToast(`${n.nombre} eliminado`); }
+  else { favorites.push(n); showToast(`${n.nombre} guardado ♥`); }
+  saveFavs(); if (drawer.classList.contains('show')) renderFavList();
+}
+function renderFavList() {
+  if (!favorites.length) {
+    favList.innerHTML = `<div class="fav-empty"><div class="fav-empty-icon">◆</div><p class="fav-empty-text">Aún no has guardado nombres.</p></div>`;
+    return;
+  }
+  favList.innerHTML = favorites.map(f => `
+    <div class="fav-item">
+      <div class="fav-item-row">
+        <div>
+          <div class="fav-item-name">${esc(f.nombre)}</div>
+          <div class="fav-item-meta">${esc(f.estilo || '')} · ${esc(f.concepto || '').slice(0,80)}…</div>
+          <div class="fav-item-domain">${esc(f.dominio || '')}</div>
+        </div>
+        <button class="icon-btn fav-btn faved" data-remove="${esc(f.nombre)}" type="button">♥</button>
+      </div>
+    </div>`).join('');
+  favList.querySelectorAll('[data-remove]').forEach(b => {
+    b.addEventListener('click', () => {
+      favorites = favorites.filter(f => f.nombre !== b.dataset.remove); saveFavs(); renderFavList();
+      grid.querySelectorAll(`.fav-btn[data-name="${b.dataset.remove}"]`).forEach(c => { c.classList.remove('faved'); c.textContent = '♡'; });
+    });
+  });
+}
+function openDrawer() { drawer.classList.add('show'); drawerBg.classList.add('show'); renderFavList(); }
+function closeDrawer() { drawer.classList.remove('show'); drawerBg.classList.remove('show'); }
+openFavBtn.addEventListener('click', openDrawer);
+closeFavBtn.addEventListener('click', closeDrawer);
+drawerBg.addEventListener('click', closeDrawer);
+copyFavsBtn.addEventListener('click', () => {
+  if (!favorites.length) return showToast('No hay guardados');
+  const t = favorites.map((f,i) => `${i+1}. ${f.nombre} — ${f.dominio || ''} — ${f.concepto || ''}`).join('\n');
+  navigator.clipboard.writeText(t).then(() => showToast('Lista copiada'));
+});
+clearFavsBtn.addEventListener('click', () => {
+  if (!favorites.length) return;
+  if (confirm('¿Eliminar todos los guardados?')) { favorites = []; saveFavs(); renderFavList(); grid.querySelectorAll('.fav-btn.faved').forEach(b => { b.classList.remove('faved'); b.textContent = '♡'; }); }
+});
+
+// ════════════════════════════════════════════════════════
+// MAIN FLOW
+// ════════════════════════════════════════════════════════
+async function generate(prompt, sp) {
+  hideError(); setLoading(true);
+  try {
+    const nombres = await callGroq(prompt, sp);
+    lastPrompt = prompt; lastSP = sp; lastResults = nombres;
+    renderResults(nombres);
+  } catch (err) { showError(err.message); console.error(err); }
+  finally { setLoading(false); }
+}
+
+generateBtn.addEventListener('click', () => {
+  hideError();
+  if (currentMode === 'describe') {
+    const v = descPrompt.value.trim();
+    if (!v) { showError('Describe tu negocio primero.'); descPrompt.focus(); return; }
+    generate(v, SP_DESCRIBE);
+  } else {
+    try {
+      const prompt = buildFormPrompt();
+      generate(prompt, SP_FORM);
+    } catch (err) { showError(err.message); }
+  }
+});
+
+regenBtn.addEventListener('click', () => { if (lastPrompt) generate(lastPrompt, lastSP); });
+copyBtn.addEventListener('click', () => {
+  if (!lastResults.length) return;
+  const t = lastResults.map((n,i) => `${i+1}. ${n.nombre} (${n.estilo}) — ${n.dominio || ''}\n   ${n.concepto}`).join('\n\n');
+  navigator.clipboard.writeText(t).then(() => showToast('Copiados'));
+});
+
+// Shortcuts
+descPrompt.addEventListener('keydown', e => { if ((e.metaKey||e.ctrlKey) && e.key === 'Enter') generateBtn.click(); });
+document.querySelectorAll('#modeForm input, #modeForm textarea').forEach(el => {
+  el.addEventListener('keydown', e => { if ((e.metaKey||e.ctrlKey) && e.key === 'Enter') { e.preventDefault(); generateBtn.click(); } });
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && drawer.classList.contains('show')) closeDrawer(); });
+
+// ════════════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════════════
+loadKey();
+saveFavs();
+</script>
+</body>
+</html>
