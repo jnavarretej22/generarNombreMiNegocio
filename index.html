@@ -33,8 +33,25 @@
       --radius-xl: 32px;
       --font-display: 'Fraunces', Georgia, serif;
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --theme-transition: background .3s, color .3s, border-color .3s, box-shadow .3s;
+    }
+    html.dark {
+      --cream: #1a1410;
+      --cream-warm: #221c16;
+      --paper: #211b14;
+      --ink: #f0e8d8;
+      --ink-soft: #b8a898;
+      --ink-mute: #7a6a5a;
+      --line: #3a3028;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.3);
+      --shadow: 0 2px 4px rgba(0,0,0,.2), 0 16px 40px -8px rgba(0,0,0,.4);
+      --shadow-lg: 0 4px 8px rgba(0,0,0,.3), 0 32px 64px -12px rgba(0,0,0,.5);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    .form-card, .key-panel, textarea, .field-input, .pill, .card, .drawer,
+    .nav-fav, .theme-btn, .btn-ghost, .fav-item, input, footer, nav {
+      transition: background-color .3s, border-color .3s, color .2s, box-shadow .3s;
+    }
     html, body {
       background: var(--cream);
       color: var(--ink);
@@ -43,7 +60,13 @@
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      transition: var(--theme-transition);
     }
+    /* ═══ THEME TOGGLE ═══ */
+    .theme-btn { display:flex; align-items:center; gap:7px; padding:8px 16px; background:var(--paper); border:1px solid var(--line); border-radius:100px; cursor:pointer; font-size:13px; font-weight:500; color:var(--ink-soft); font-family:var(--font-body); transition:all .25s; white-space:nowrap; }
+    .theme-btn:hover { border-color:var(--coral); color:var(--ink); background:var(--cream-warm); transform:translateY(-1px); }
+    .theme-btn .theme-icon { font-size:15px; line-height:1; }
+    .nav-right { display:flex; align-items:center; gap:10px; }
 
     /* ═══ ANIMATED BACKGROUND ═══ */
     .bg-blobs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
@@ -243,6 +266,33 @@
     footer span { color: var(--plum); }
     footer a { color: var(--coral-deep); text-decoration: underline; text-underline-offset: 2px; }
 
+    /* ═══ TILT 3D ═══ */
+    .card { transform-style:preserve-3d; will-change:transform; }
+    .card.tilt-active { transition:box-shadow .3s, border-color .3s !important; }
+    .card.tilt-leave  { transition:transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .3s, border-color .3s !important; }
+
+    /* ═══ PRONUNCIACIÓN ═══ */
+    .icon-btn.speak-btn { font-size:13px; }
+    .icon-btn.speak-btn.speaking { color:var(--coral-deep); background:rgba(194,80,52,.1); animation:pulse-speak .6s ease-in-out infinite alternate; }
+    @keyframes pulse-speak { from { transform:scale(1); } to { transform:scale(1.15); } }
+
+    /* ═══ SKELETON LOADERS ═══ */
+    .skeleton-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:20px; margin-top:80px; }
+    .skeleton-card { background:var(--paper); border-radius:var(--radius-lg); padding:28px 24px 24px; border:1px solid rgba(224,211,184,.4); overflow:hidden; }
+    .skel { background:linear-gradient(90deg, var(--cream-warm) 25%, var(--cream) 50%, var(--cream-warm) 75%); background-size:200% 100%; border-radius:6px; animation:shimmer 1.4s ease-in-out infinite; }
+    .skel-num    { height:12px; width:40px; margin-bottom:16px; }
+    .skel-name   { height:38px; width:65%; margin-bottom:12px; border-radius:8px; }
+    .skel-badge  { height:18px; width:90px; border-radius:100px; margin-bottom:14px; }
+    .skel-line   { height:12px; width:100%; margin-bottom:8px; }
+    .skel-line.short { width:60%; }
+    .skel-div    { height:1px; background:var(--line); margin:14px 0; }
+    .skel-domain { height:28px; width:100%; border-radius:6px; }
+    @keyframes shimmer { 0% { background-position:200% 0; } 100% { background-position:-200% 0; } }
+
+    /* ═══ LOADING PHRASE ═══ */
+    .loading-phrase { text-align:center; margin-top:20px; font-family:var(--font-display); font-style:italic; font-size:1rem; color:var(--ink-mute); min-height:1.5em; animation:fade-phrase .5s ease; }
+    @keyframes fade-phrase { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
     /* ═══ MOBILE ═══ */
     @media (max-width: 720px) {
       .wrap { padding: 16px 16px 64px; }
@@ -267,10 +317,16 @@
         <span class="logo-mark">L</span>
         <div><span>Lumen</span><br/><small>Business</small></div>
       </div>
-      <button class="nav-fav" id="openFav" type="button">
-        <span class="heart">♥</span> Guardados
-        <span class="nav-fav-count" id="favCount">0</span>
-      </button>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" type="button" aria-label="Cambiar tema">
+          <span class="theme-icon" id="themeIcon">☾</span>
+          <span id="themeLabel">Oscuro</span>
+        </button>
+        <button class="nav-fav" id="openFav" type="button">
+          <span class="heart">♥</span> Guardados
+          <span class="nav-fav-count" id="favCount">0</span>
+        </button>
+      </div>
     </nav>
 
     <!-- ═══ HERO ═══ -->
@@ -403,6 +459,10 @@
       <div class="error" id="errorBox"></div>
     </div>
 
+    <!-- ═══ SKELETON ═══ -->
+    <div class="skeleton-grid" id="skeletonGrid" style="display:none"></div>
+    <p class="loading-phrase" id="loadingPhrase" style="display:none"></p>
+
     <!-- ═══ RESULTS ═══ -->
     <section class="results-wrap" id="resultsWrap">
       <div class="results-header">
@@ -446,26 +506,36 @@ const STORAGE_KEY = 'groq_api_key_baby_names';
 const FAVS_KEY = 'lumen_business_favorites';
 
 // ── System prompt: modo Describir ──
-const SP_DESCRIBE = `Eres un experto en branding, naming empresarial y estrategia de marca con más de 20 años de experiencia.
+const SP_DESCRIBE = `Eres un experto senior en branding, naming empresarial y estrategia de marca con más de 20 años creando nombres para startups, pymes y corporaciones globales.
 
-El usuario describirá su negocio en lenguaje natural. Tu tarea es generar EXACTAMENTE 10 nombres de negocio únicos, creativos y registrables.
+Tu tarea es generar EXACTAMENTE 10 nombres de negocio que pasen un filtro de calidad exigente.
 
-REGLAS:
-1. Exactamente 10 nombres, todos únicos.
-2. Diversifica los estilos: incluye al menos 3 estilos diferentes entre Neologismo, Descriptivo, Acrónimo, Compuesto, Abstracto.
-3. Cada nombre debe ser corto, memorable, fácil de pronunciar y potencialmente registrable como dominio.
-4. En "concepto", explica brevemente la idea detrás del nombre y por qué encaja con el negocio descrito.
-5. En "dominio", sugiere la extensión más plausible (nombre.com, nombre.io, nombre.co, nombre.app, etc.) — es solo una sugerencia, no verificas disponibilidad.
-6. En "estilo", clasifica el nombre: Neologismo, Descriptivo, Acrónimo, Compuesto o Abstracto.
-7. Responde en el mismo idioma que el usuario.
-8. Devuelve SOLO un JSON válido con esta estructura:
+FILTRO DE CALIDAD — cada nombre debe superar TODAS estas pruebas:
+1. SONORIDAD: Suena bien en voz alta. Tiene cadencia agradable y es fácil de pronunciar en el idioma del usuario.
+2. MEMORABILIDAD: Se recuerda tras escucharlo una sola vez. Evita nombres genéricos o predecibles.
+3. REGISTRABILIDAD: Podría ser registrado como marca. Evita palabras demasiado descriptivas o genéricas.
+4. DOMINIO VIABLE: Existe una extensión de dominio plausible (.com, .io, .co, .app, etc.).
+5. ESCALABILIDAD: El nombre funciona si el negocio crece o pivota ligeramente. No encasilla en exceso.
+
+CRITERIOS DE DIVERSIDAD — los 10 nombres en conjunto deben:
+- Incluir al menos 3 estilos distintos: Neologismo, Descriptivo, Acrónimo, Compuesto, Abstracto.
+- Variar en longitud: algunos cortos (1 sílaba/palabra), algunos medios, alguno más expresivo.
+- No empezar todos por la misma letra.
+
+REGLAS ESTRICTAS:
+1. Exactamente 10 nombres únicos.
+2. En "concepto": explica en 1-2 líneas la idea detrás del nombre Y por qué es un gran nombre para ese negocio específico (sonido, evocación, escalabilidad).
+3. En "dominio": sugiere la extensión más realista y disponible.
+4. En "estilo": clasifica como Neologismo, Descriptivo, Acrónimo, Compuesto o Abstracto.
+5. Responde en el mismo idioma que el usuario.
+6. Devuelve SOLO JSON válido:
 
 {
   "nombres": [
     {
       "nombre": "string",
       "estilo": "string (Neologismo|Descriptivo|Acrónimo|Compuesto|Abstracto)",
-      "concepto": "string (máximo 2 líneas)",
+      "concepto": "string (por qué es un gran nombre para este negocio, máximo 2 líneas)",
       "dominio": "string (ej: miempresa.com)"
     }
   ]
@@ -474,31 +544,34 @@ REGLAS:
 No incluyas texto fuera del JSON.`;
 
 // ── System prompt: modo Formulario guiado ──
-const SP_FORM = `Eres un experto en branding, naming empresarial y estrategia de marca con más de 20 años de experiencia.
+const SP_FORM = `Eres un experto senior en branding, naming empresarial y estrategia de marca con más de 20 años creando nombres para startups, pymes y corporaciones globales.
 
-Se te proporcionará un briefing estructurado con información sobre un negocio y preferencias para el nombre. Tu tarea es generar EXACTAMENTE 10 nombres que cumplan TODAS las restricciones indicadas.
+Se te proporcionará un briefing estructurado. Tu tarea es generar EXACTAMENTE 10 nombres que cumplan TODAS las restricciones indicadas Y que pasen el filtro de calidad.
+
+FILTRO DE CALIDAD — cada nombre debe:
+1. Sonar bien en voz alta en el idioma base indicado.
+2. Ser memorable y diferenciador — evita nombres genéricos.
+3. Ser potencialmente registrable como marca y dominio.
+4. Encajar con el tono, industria y cliente ideal descritos.
 
 REGLAS ESTRICTAS:
 1. Exactamente 10 nombres únicos.
-2. Si el briefing especifica que el nombre debe empezar con ciertas letras, TODOS los nombres deben cumplirlo.
-3. Si especifica que debe terminar con cierto sufijo, TODOS deben cumplirlo.
-4. Si especifica que debe contener cierta palabra o sílaba, TODOS deben incluirla.
-5. Si indica longitud (corto/medio/largo), respétala.
-6. Si indica idioma base, genera nombres en ese idioma o estilo.
-7. Si lista palabras a evitar, NINGÚN nombre debe contenerlas ni evocarlas.
-8. Si menciona marcas de referencia, inspírate en su estilo (no copies).
-9. Si alguna combinación de restricciones hace casi imposible generar 10 nombres, genera los que puedas y explica en "concepto" por qué ajustaste.
-10. En "dominio", sugiere la extensión más plausible.
-11. En "estilo", clasifica: Neologismo, Descriptivo, Acrónimo, Compuesto o Abstracto.
-12. Responde en español.
-13. Devuelve SOLO JSON:
+2. Respeta TODAS las restricciones del briefing: prefijo, sufijo, contiene, longitud, idioma, palabras a evitar.
+3. Si hay palabras a evitar, NINGÚN nombre puede contenerlas ni evocarlas semánticamente.
+4. Si hay marcas de referencia, inspírate en su estilo fonético y de posicionamiento (no copies).
+5. Si alguna combinación de restricciones hace imposible 10 nombres de calidad, genera los que puedas y explica el ajuste en "concepto".
+6. En "concepto": explica por qué el nombre es idóneo para ese negocio concreto Y cómo cumple las restricciones (máximo 2 líneas).
+7. En "dominio": sugiere la extensión más realista.
+8. En "estilo": Neologismo, Descriptivo, Acrónimo, Compuesto o Abstracto.
+9. Responde en español.
+10. Devuelve SOLO JSON:
 
 {
   "nombres": [
     {
       "nombre": "string",
       "estilo": "string (Neologismo|Descriptivo|Acrónimo|Compuesto|Abstracto)",
-      "concepto": "string (máximo 2 líneas, incluye cómo cumple las restricciones)",
+      "concepto": "string (por qué encaja + cómo cumple restricciones, máximo 2 líneas)",
       "dominio": "string"
     }
   ]
@@ -660,10 +733,57 @@ function buildFormPrompt() {
 // ════════════════════════════════════════════════════════
 function showError(m) { errorBox.textContent = m; errorBox.classList.add('show'); }
 function hideError() { errorBox.classList.remove('show'); }
+
+const LOADING_PHRASES = [
+  'Consultando expertos en branding global…',
+  'Evaluando sonoridad y memorabilidad…',
+  'Verificando potencial de dominio…',
+  'Generando nombres que escalen con tu negocio…',
+  'Analizando posicionamiento de marca…',
+  'Buscando el nombre que te diferencie…',
+  'Ajustando creatividad y estrategia…',
+  'Casi listo, los mejores nombres toman su tiempo…',
+];
+let phraseInterval = null;
+
+function startLoadingPhrases() {
+  const el = $('loadingPhrase');
+  const skelGrid = $('skeletonGrid');
+  el.style.display = 'block';
+  skelGrid.style.display = 'grid';
+  skelGrid.innerHTML = Array.from({length: 6}, () => `
+    <div class="skeleton-card">
+      <div class="skel skel-num"></div>
+      <div class="skel skel-name"></div>
+      <div class="skel skel-badge"></div>
+      <div class="skel skel-line"></div>
+      <div class="skel skel-line short"></div>
+      <div class="skel-div"></div>
+      <div class="skel skel-domain"></div>
+    </div>`).join('');
+  let idx = 0;
+  el.textContent = LOADING_PHRASES[0];
+  phraseInterval = setInterval(() => {
+    idx = (idx + 1) % LOADING_PHRASES.length;
+    el.style.animation = 'none';
+    el.offsetHeight;
+    el.style.animation = '';
+    el.textContent = LOADING_PHRASES[idx];
+  }, 1800);
+  setTimeout(() => skelGrid.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+function stopLoadingPhrases() {
+  clearInterval(phraseInterval);
+  $('loadingPhrase').style.display = 'none';
+  $('skeletonGrid').style.display  = 'none';
+}
+
 function setLoading(on) {
   generateBtn.disabled = on;
   generateBtn.classList.toggle('loading', on);
   generateBtn.querySelector('.label').textContent = on ? 'Generando…' : '◆ Generar 10 nombres';
+  if (on) startLoadingPhrases();
+  else    stopLoadingPhrases();
 }
 function showToast(m) { toast.textContent = m; toast.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(() => toast.classList.remove('show'), 2400); }
 function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
@@ -677,7 +797,7 @@ async function callGroq(prompt, sp) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       messages: [{ role: 'system', content: sp }, { role: 'user', content: prompt }],
-      temperature: 0.9, max_tokens: 2000,
+      temperature: 1.0, max_tokens: 2500,
       response_format: { type: 'json_object' }
     })
   });
@@ -721,6 +841,7 @@ function renderResults(nombres) {
       <div class="card-top">
         <span class="card-num">N.º ${String(i+1).padStart(2,'0')}</span>
         <div class="card-actions">
+          <button class="icon-btn speak-btn" data-name="${esc(n.nombre)}" aria-label="Pronunciar" type="button">🔊</button>
           <button class="icon-btn fav-btn ${isFav?'faved':''}" data-idx="${i}" data-name="${esc(n.nombre)}" aria-label="Guardar" type="button">${isFav?'♥':'♡'}</button>
         </div>
       </div>
@@ -735,7 +856,7 @@ function renderResults(nombres) {
     grid.appendChild(card);
   });
 
-  // Wire fav buttons
+  // Fav buttons
   grid.querySelectorAll('.fav-btn').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
@@ -744,6 +865,39 @@ function renderResults(nombres) {
       const nowFav = isFavorite(btn.dataset.name);
       btn.classList.toggle('faved', nowFav);
       btn.textContent = nowFav ? '♥' : '♡';
+    });
+  });
+
+  // Speak buttons
+  grid.querySelectorAll('.speak-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const name = btn.dataset.name;
+      if (!window.speechSynthesis) return showToast('Tu navegador no soporta síntesis de voz');
+      speechSynthesis.cancel();
+      const utt = new SpeechSynthesisUtterance(name);
+      utt.lang = 'es-ES'; utt.rate = 0.85; utt.pitch = 1.0;
+      btn.classList.add('speaking');
+      utt.onend  = () => btn.classList.remove('speaking');
+      utt.onerror= () => btn.classList.remove('speaking');
+      speechSynthesis.speak(utt);
+    });
+  });
+
+  // Tilt 3D
+  grid.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width /2)) / (r.width /2);
+      const dy = (e.clientY - (r.top  + r.height/2)) / (r.height/2);
+      card.classList.add('tilt-active');
+      card.style.transform = `perspective(700px) rotateY(${dx*6}deg) rotateX(${-dy*5}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.classList.remove('tilt-active');
+      card.classList.add('tilt-leave');
+      card.style.transform = '';
+      setTimeout(() => card.classList.remove('tilt-leave'), 400);
     });
   });
 
@@ -842,8 +996,33 @@ document.querySelectorAll('#modeForm input, #modeForm textarea').forEach(el => {
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && drawer.classList.contains('show')) closeDrawer(); });
 
 // ════════════════════════════════════════════════════════
+// DARK MODE
+// ════════════════════════════════════════════════════════
+const themeBtn   = $('themeBtn');
+const themeIcon  = $('themeIcon');
+const themeLabel = $('themeLabel');
+const THEME_KEY  = 'lumen_theme';
+
+function applyTheme(dark) {
+  document.documentElement.classList.toggle('dark', dark);
+  themeIcon.textContent  = dark ? '☀' : '☾';
+  themeLabel.textContent = dark ? 'Claro' : 'Oscuro';
+}
+function initTheme() {
+  const saved = localStorage.getItem(THEME_KEY);
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  applyTheme(saved ? saved === 'dark' : prefersDark);
+}
+themeBtn.addEventListener('click', () => {
+  const isDark = document.documentElement.classList.toggle('dark');
+  localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
+  applyTheme(isDark);
+});
+
+// ════════════════════════════════════════════════════════
 // INIT
 // ════════════════════════════════════════════════════════
+initTheme();
 loadKey();
 saveFavs();
 </script>
