@@ -151,8 +151,16 @@
       background: var(--cream); font-family: var(--font-body); font-size: 15px; line-height: 1.55;
       color: var(--ink); outline: none; transition: all .25s; resize: vertical;
     }
-    textarea:focus, .field-input:focus { border-color: var(--coral-deep); box-shadow: 0 0 0 4px rgba(194,80,52,.08); background: white; }
+    textarea:focus, .field-input:focus { border-color: var(--coral-deep); box-shadow: 0 0 0 4px rgba(194,80,52,.08); background: var(--paper); }
     textarea::placeholder, .field-input::placeholder { color: var(--ink-mute); }
+    html.dark textarea, html.dark .field-input {
+      background: #2a2118;
+      color: var(--ink);
+    }
+    html.dark textarea:focus, html.dark .field-input:focus {
+      background: #32261c;
+      border-color: var(--coral);
+    }
 
     /* Pills */
     .pill { padding: 8px 16px; border: 1px solid var(--line); background: var(--cream); border-radius: 100px; font-size: 13px; color: var(--ink-soft); cursor: pointer; transition: all .2s; font-family: var(--font-body); display: inline-flex; align-items: center; gap: 6px; }
@@ -168,7 +176,9 @@
     .compact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
     .compact-field label { display: block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 8px; font-weight: 500; }
     .compact-field input { width: 100%; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--cream); font-family: var(--font-body); font-size: 14px; color: var(--ink); outline: none; transition: all .2s; }
-    .compact-field input:focus { border-color: var(--coral-deep); background: white; }
+    .compact-field input:focus { border-color: var(--coral-deep); background: var(--paper); }
+    html.dark .compact-field input { background: #2a2118; color: var(--ink); }
+    html.dark .compact-field input:focus { background: #32261c; border-color: var(--coral); }
 
     /* Collapsible optional section */
     .optional-toggle { display: flex; align-items: center; gap: 10px; padding: 14px 0; cursor: pointer; border: none; background: transparent; font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--ink-soft); letter-spacing: .04em; width: 100%; text-align: left; border-top: 1px dashed var(--line); margin-top: 8px; }
@@ -293,6 +303,58 @@
     .loading-phrase { text-align:center; margin-top:20px; font-family:var(--font-display); font-style:italic; font-size:1rem; color:var(--ink-mute); min-height:1.5em; animation:fade-phrase .5s ease; }
     @keyframes fade-phrase { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
 
+    /* ═══ PERSONALIZACIÓN DESCRIBE ═══ */
+    .custom-banner {
+      margin-top: 18px;
+      border: 1.5px dashed var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .custom-banner-toggle {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 18px; background: transparent; border: none; cursor: pointer;
+      font-family: var(--font-body); text-align: left; gap: 12px;
+      transition: background .2s;
+    }
+    .custom-banner-toggle:hover { background: var(--cream-warm); }
+    html.dark .custom-banner-toggle:hover { background: rgba(255,255,255,.04); }
+    .custom-banner-left { display: flex; align-items: center; gap: 10px; }
+    .custom-banner-icon { font-size: 18px; line-height: 1; }
+    .custom-banner-texts { display: flex; flex-direction: column; gap: 2px; }
+    .custom-banner-title { font-size: 13px; font-weight: 600; color: var(--ink); }
+    .custom-banner-sub   { font-size: 11.5px; color: var(--ink-mute); }
+    .custom-banner-chips { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .custom-chip {
+      font-size: 10.5px; font-weight: 600; letter-spacing: .06em;
+      padding: 3px 9px; border-radius: 100px; background: var(--cream-warm);
+      color: var(--ink-soft); border: 1px solid var(--line); white-space: nowrap;
+    }
+    .custom-banner-chev { font-size: 11px; color: var(--coral); transition: transform .3s; flex-shrink: 0; }
+    .custom-banner-toggle.open .custom-banner-chev { transform: rotate(90deg); }
+    .custom-banner-body {
+      display: none; padding: 0 18px 18px; border-top: 1px dashed var(--line);
+      animation: mfade .3s ease;
+    }
+    .custom-banner-body.open { display: block; }
+    .custom-benefits {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+      padding: 14px 0 16px;
+    }
+    .custom-benefit {
+      display: flex; align-items: flex-start; gap: 8px;
+      padding: 10px 12px; border-radius: 10px;
+      background: var(--cream); border: 1px solid var(--line);
+    }
+    html.dark .custom-benefit { background: #2a2118; }
+    .benefit-icon { font-size: 16px; line-height: 1; margin-top: 1px; flex-shrink: 0; }
+    .benefit-text strong { display: block; font-size: 11px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+    .benefit-text span   { font-size: 10.5px; color: var(--ink-mute); line-height: 1.4; }
+    .custom-divider { height: 1px; background: var(--line); margin: 2px 0 14px; }
+    @media (max-width: 600px) {
+      .custom-benefits { grid-template-columns: 1fr 1fr; }
+      .custom-banner-chips { display: none; }
+    }
+
     /* ═══ MOBILE ═══ */
     @media (max-width: 720px) {
       .wrap { padding: 16px 16px 64px; }
@@ -364,6 +426,132 @@
       <div class="mode active" id="modeDescribe">
         <label class="form-label" for="descPrompt">Describe tu negocio, tu visión, tu público</label>
         <textarea id="descPrompt" rows="5" placeholder="Ej: Estoy creando una empresa de desarrollo de software en Ecuador, enfocada en soluciones cloud para pymes del sector salud. Quiero un nombre tecnológico pero cercano, fácil de recordar y que funcione como dominio .com"></textarea>
+
+        <!-- ── Personalización visible ── -->
+        <div class="custom-banner" id="customBanner">
+          <button class="custom-banner-toggle" id="customToggle" type="button" aria-expanded="false">
+            <div class="custom-banner-left">
+              <span class="custom-banner-icon">✦</span>
+              <div class="custom-banner-texts">
+                <span class="custom-banner-title">Personaliza tu nombre ideal</span>
+                <span class="custom-banner-sub">Tono · Longitud · Idioma · Restricciones</span>
+              </div>
+            </div>
+            <div class="custom-banner-chips">
+              <span class="custom-chip">🎯 Tono</span>
+              <span class="custom-chip">📏 Longitud</span>
+              <span class="custom-chip">🌐 Idioma</span>
+              <span class="custom-chip">🚫 Evitar</span>
+            </div>
+            <span class="custom-banner-chev">▸</span>
+          </button>
+
+          <div class="custom-banner-body" id="customBody">
+            <!-- Beneficios -->
+            <div class="custom-benefits">
+              <div class="custom-benefit">
+                <span class="benefit-icon">🎯</span>
+                <div class="benefit-text">
+                  <strong>Tono de marca</strong>
+                  <span>Elegante, audaz, minimalista… la IA adapta el naming a tu personalidad</span>
+                </div>
+              </div>
+              <div class="custom-benefit">
+                <span class="benefit-icon">📏</span>
+                <div class="benefit-text">
+                  <strong>Longitud exacta</strong>
+                  <span>Corto para apps, largo para agencias. Tú decides cuánto debe medir</span>
+                </div>
+              </div>
+              <div class="custom-benefit">
+                <span class="benefit-icon">🌐</span>
+                <div class="benefit-text">
+                  <strong>Idioma base</strong>
+                  <span>Español, inglés, neologismo o mixto. El dominio lo agradecerá</span>
+                </div>
+              </div>
+              <div class="custom-benefit">
+                <span class="benefit-icon">🔤</span>
+                <div class="benefit-text">
+                  <strong>Prefijo / sufijo</strong>
+                  <span>Empieza o termina con lo que necesitas: ec·, ·labs, ·co…</span>
+                </div>
+              </div>
+              <div class="custom-benefit">
+                <span class="benefit-icon">🚫</span>
+                <div class="benefit-text">
+                  <strong>Palabras a evitar</strong>
+                  <span>Solutions, global, synergy… banea los clichés del sector</span>
+                </div>
+              </div>
+              <div class="custom-benefit">
+                <span class="benefit-icon">💡</span>
+                <div class="benefit-text">
+                  <strong>Marcas referente</strong>
+                  <span>Inspírate en Stripe, Notion, Figma… sin copiarlas</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="custom-divider"></div>
+
+            <!-- Tono / Personalidad -->
+            <div class="field-group">
+              <div class="field-title">Tono / Personalidad</div>
+              <div class="field-row" id="dtoneRow">
+                <button class="pill" data-dtone="Profesional" type="button">Profesional</button>
+                <button class="pill" data-dtone="Moderno" type="button">Moderno</button>
+                <button class="pill" data-dtone="Divertido" type="button">Divertido</button>
+                <button class="pill" data-dtone="Elegante" type="button">Elegante</button>
+                <button class="pill" data-dtone="Minimalista" type="button">Minimalista</button>
+                <button class="pill" data-dtone="Audaz" type="button">Audaz</button>
+                <button class="pill" data-dtone="Confiable" type="button">Confiable</button>
+                <button class="pill" data-dtone="Innovador" type="button">Innovador</button>
+                <button class="pill" data-dtone="Premium" type="button">Premium</button>
+              </div>
+            </div>
+
+            <!-- Longitud + Idioma -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+              <div class="field-group" style="margin-bottom:0">
+                <div class="field-title">Longitud preferida</div>
+                <div class="field-row" id="dlenRow">
+                  <button class="pill" data-dlen="Corto (1 palabra, máximo 7 letras)" type="button">Corto</button>
+                  <button class="pill" data-dlen="Medio (1-2 palabras)" type="button">Medio</button>
+                  <button class="pill" data-dlen="Largo / descriptivo" type="button">Largo</button>
+                </div>
+              </div>
+              <div class="field-group" style="margin-bottom:0">
+                <div class="field-title">Idioma base</div>
+                <div class="field-row" id="dlangRow">
+                  <button class="pill" data-dlang="Español" type="button">Español</button>
+                  <button class="pill" data-dlang="Inglés" type="button">Inglés</button>
+                  <button class="pill" data-dlang="Neologismo" type="button">Neologismo</button>
+                  <button class="pill" data-dlang="Mixto" type="button">Mixto</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Prefijo / Sufijo / Contiene -->
+            <div class="compact-grid" style="margin-bottom:14px">
+              <div class="compact-field"><label>Debe empezar con…</label><input id="dPrefix" placeholder="ej: eco, my" maxlength="10" /></div>
+              <div class="compact-field"><label>Debe terminar con…</label><input id="dSuffix" placeholder="ej: labs, co" maxlength="15" /></div>
+              <div class="compact-field"><label>Debe contener…</label><input id="dContains" placeholder="ej: cloud" maxlength="20" /></div>
+            </div>
+
+            <!-- Palabras a evitar + Referentes -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div class="field-group" style="margin-bottom:0">
+                <div class="field-title">Palabras a evitar</div>
+                <input class="field-input" id="dAvoid" placeholder="solutions, global…" />
+              </div>
+              <div class="field-group" style="margin-bottom:0">
+                <div class="field-title">Marcas referente</div>
+                <input class="field-input" id="dRefs" placeholder="Stripe, Notion…" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- ─── MODO 2: FORMULARIO GUIADO ─── -->
@@ -398,7 +586,9 @@
 
         <!-- Opcionales (colapsable) -->
         <button class="optional-toggle" id="optToggle" type="button">
-          <span class="opt-chev">▸</span> Personalizar el nombre (opcional)
+          <span class="opt-chev">▸</span>
+          <span style="flex:1">Personalizar el nombre</span>
+          <span style="font-size:10.5px;font-weight:600;color:var(--coral);background:rgba(232,130,106,.12);padding:3px 9px;border-radius:100px;border:1px solid rgba(232,130,106,.25);">Opcional · mejora los resultados</span>
         </button>
         <div class="optional-body" id="optBody">
           <div class="field-group">
@@ -619,6 +809,11 @@ let selectedTones = new Set();
 let selectedLen = null;
 let selectedLang = null;
 
+// Describe-mode custom states
+let dSelectedTones = new Set();
+let dSelectedLen   = null;
+let dSelectedLang  = null;
+
 // ════════════════════════════════════════════════════════
 // API KEY
 // ════════════════════════════════════════════════════════
@@ -645,11 +840,22 @@ document.querySelectorAll('.mode-tab').forEach(tab => {
 });
 
 // ════════════════════════════════════════════════════════
-// OPTIONAL TOGGLE (collapsible)
+// OPTIONAL TOGGLE (collapsible) — Formulario guiado
 // ════════════════════════════════════════════════════════
 optToggle.addEventListener('click', () => {
   optToggle.classList.toggle('open');
   optBody.classList.toggle('open');
+});
+
+// ════════════════════════════════════════════════════════
+// CUSTOM BANNER TOGGLE — Modo Describir
+// ════════════════════════════════════════════════════════
+const customToggle = $('customToggle');
+const customBody   = $('customBody');
+customToggle.addEventListener('click', () => {
+  const isOpen = customBody.classList.toggle('open');
+  customToggle.classList.toggle('open', isOpen);
+  customToggle.setAttribute('aria-expanded', isOpen);
 });
 
 // ════════════════════════════════════════════════════════
@@ -685,6 +891,29 @@ document.querySelectorAll('#langRow .pill').forEach(p => {
     const v = p.dataset.lang;
     if (selectedLang === v) { selectedLang = null; p.classList.remove('active'); }
     else { selectedLang = v; document.querySelectorAll('#langRow .pill').forEach(x => x.classList.remove('active')); p.classList.add('active'); }
+  });
+});
+
+// ── Describe-mode pill handlers ──
+document.querySelectorAll('#dtoneRow .pill').forEach(p => {
+  p.addEventListener('click', () => {
+    const v = p.dataset.dtone;
+    if (dSelectedTones.has(v)) { dSelectedTones.delete(v); p.classList.remove('active'); }
+    else { dSelectedTones.add(v); p.classList.add('active'); }
+  });
+});
+document.querySelectorAll('#dlenRow .pill').forEach(p => {
+  p.addEventListener('click', () => {
+    const v = p.dataset.dlen;
+    if (dSelectedLen === v) { dSelectedLen = null; p.classList.remove('active'); }
+    else { dSelectedLen = v; document.querySelectorAll('#dlenRow .pill').forEach(x => x.classList.remove('active')); p.classList.add('active'); }
+  });
+});
+document.querySelectorAll('#dlangRow .pill').forEach(p => {
+  p.addEventListener('click', () => {
+    const v = p.dataset.dlang;
+    if (dSelectedLang === v) { dSelectedLang = null; p.classList.remove('active'); }
+    else { dSelectedLang = v; document.querySelectorAll('#dlangRow .pill').forEach(x => x.classList.remove('active')); p.classList.add('active'); }
   });
 });
 
@@ -972,7 +1201,22 @@ generateBtn.addEventListener('click', () => {
   if (currentMode === 'describe') {
     const v = descPrompt.value.trim();
     if (!v) { showError('Describe tu negocio primero.'); descPrompt.focus(); return; }
-    generate(v, SP_DESCRIBE);
+    // Anexar restricciones de personalización si las hay
+    let extras = '';
+    if (dSelectedTones.size)  extras += `\nTONO DESEADO: ${[...dSelectedTones].join(', ')}`;
+    if (dSelectedLen)         extras += `\nLONGITUD PREFERIDA: ${dSelectedLen}`;
+    if (dSelectedLang)        extras += `\nIDIOMA BASE: ${dSelectedLang}`;
+    const dPrefix = $('dPrefix')?.value.trim();
+    const dSuffix = $('dSuffix')?.value.trim();
+    const dContains = $('dContains')?.value.trim();
+    if (dPrefix)   extras += `\nRESTRICCIÓN — El nombre DEBE empezar con: "${dPrefix}"`;
+    if (dSuffix)   extras += `\nRESTRICCIÓN — El nombre DEBE terminar con: "${dSuffix}"`;
+    if (dContains) extras += `\nRESTRICCIÓN — El nombre DEBE contener: "${dContains}"`;
+    const dAvoid = $('dAvoid')?.value.trim();
+    const dRefs  = $('dRefs')?.value.trim();
+    if (dAvoid) extras += `\nPALABRAS A EVITAR: ${dAvoid}`;
+    if (dRefs)  extras += `\nMARCAS DE REFERENCIA (inspiración, no copiar): ${dRefs}`;
+    generate(v + extras, SP_DESCRIBE);
   } else {
     try {
       const prompt = buildFormPrompt();
