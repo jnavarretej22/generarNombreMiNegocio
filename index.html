@@ -355,6 +355,159 @@
       .custom-banner-chips { display: none; }
     }
 
+    /* ═══ TONE BAR — selector de temperatura ═══ */
+    .tone-bar {
+      display: flex; align-items: center; gap: 10px;
+      margin-top: 18px; padding: 6px 6px 6px 16px;
+      background: var(--cream); border: 1px solid var(--line);
+      border-radius: 100px; flex-wrap: wrap;
+    }
+    .tone-label {
+      font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-mute); font-weight: 600;
+    }
+    .tone-pills { display: flex; gap: 2px; flex: 1; justify-content: flex-end; }
+    .tone-pill {
+      padding: 7px 14px; border: none; background: transparent;
+      font-family: var(--font-body); font-size: 12px; font-weight: 500;
+      color: var(--ink-soft); border-radius: 100px; cursor: pointer; transition: all .2s;
+    }
+    .tone-pill:hover { color: var(--ink); }
+    .tone-pill.active { background: var(--ink); color: var(--cream); box-shadow: 0 2px 6px rgba(31,24,18,.15); }
+
+    /* ═══ DRAWER TABS (Favoritos / Historial) ═══ */
+    .drawer-tabs {
+      display: inline-flex; gap: 2px;
+      background: var(--cream); border-radius: 100px;
+      padding: 4px; border: 1px solid var(--line);
+    }
+    .drawer-tab {
+      padding: 7px 14px; border: none; background: transparent;
+      font-family: var(--font-body); font-size: 12px; font-weight: 500;
+      color: var(--ink-soft); border-radius: 100px; cursor: pointer;
+      transition: all .25s; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .drawer-tab:hover { color: var(--ink); }
+    .drawer-tab.active { background: var(--ink); color: var(--cream); box-shadow: 0 2px 6px rgba(31,24,18,.15); }
+    .drawer-tab-count {
+      display: inline-block; font-size: 10px; font-weight: 600;
+      padding: 1px 7px; border-radius: 100px; min-width: 18px; text-align: center;
+      background: var(--cream-warm); color: var(--ink-mute);
+    }
+    .drawer-tab.active .drawer-tab-count { background: rgba(255,255,255,.18); color: var(--cream); }
+    .drawer-view { display: none; }
+    .drawer-view.active { display: block; }
+
+    /* ═══ HISTORY LIST ═══ */
+    .history-item {
+      padding: 14px 16px; background: var(--paper);
+      border: 1px solid var(--line); border-radius: var(--radius);
+      margin-bottom: 10px; transition: all .2s;
+    }
+    .history-item:hover { border-color: var(--coral); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+    .history-prompt {
+      font-size: 13px; color: var(--ink); line-height: 1.45;
+      margin-bottom: 8px;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+      overflow: hidden; cursor: pointer;
+    }
+    .history-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 11px; color: var(--ink-mute); letter-spacing: .04em; margin-bottom: 8px;
+    }
+    .history-mode-badge {
+      text-transform: uppercase; letter-spacing: .14em; font-weight: 600;
+      font-size: 10px; padding: 3px 8px; border-radius: 100px;
+      background: var(--cream-warm); color: var(--ink-soft);
+    }
+    .history-mode-badge.form { background: rgba(139,94,122,.18); color: var(--plum); }
+    .history-names {
+      font-family: var(--font-display); font-style: italic;
+      font-size: 14px; color: var(--ink-soft); line-height: 1.5; margin-bottom: 12px;
+    }
+    .history-actions { display: flex; gap: 8px; }
+    .history-actions button {
+      flex: 1; padding: 8px 12px; border-radius: 8px;
+      border: 1px solid var(--line); background: var(--cream);
+      font-size: 12px; font-weight: 500; color: var(--ink); cursor: pointer;
+      font-family: var(--font-body); transition: all .2s;
+    }
+    .history-actions button:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+    /* ═══ CARD ICONS — exclude + similar ═══ */
+    .icon-btn.exclude-btn:hover { background: rgba(194,80,52,.12); color: var(--coral-deep); }
+    .icon-btn.similar-btn:hover { background: rgba(184,137,62,.14); color: var(--gold); }
+    .card.excluding {
+      transform: translateY(-10px) scale(.94) !important; opacity: 0;
+      transition: transform .28s ease, opacity .28s ease !important;
+      pointer-events: none;
+    }
+
+    /* ═══ COMPARE MODAL ═══ */
+    .modal-bg {
+      position: fixed; inset: 0;
+      background: rgba(31,24,18,.55);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      opacity: 0; pointer-events: none; transition: opacity .3s;
+      z-index: 150; display: grid; place-items: center; padding: 24px;
+    }
+    .modal-bg.show { opacity: 1; pointer-events: auto; }
+    .modal {
+      background: var(--cream); border-radius: var(--radius-lg);
+      max-width: 1100px; width: 100%; max-height: 86vh;
+      display: flex; flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(12px) scale(.97); transition: transform .3s;
+    }
+    .modal-bg.show .modal { transform: translateY(0) scale(1); }
+    .modal-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 24px; border-bottom: 1px solid var(--line);
+    }
+    .modal-title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; letter-spacing: -0.01em; }
+    .modal-title em { font-style: italic; color: var(--plum); }
+    .modal-body { flex: 1; overflow-y: auto; padding: 20px 24px; }
+    .compare-table { width: 100%; border-collapse: collapse; }
+    .compare-table th, .compare-table td {
+      text-align: left; padding: 14px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top; font-size: 13px; line-height: 1.55; color: var(--ink);
+    }
+    .compare-table th {
+      font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-mute); font-weight: 600;
+      border-bottom: 1px solid var(--ink-soft);
+      background: var(--cream-warm); position: sticky; top: 0;
+    }
+    .compare-table tr:hover td { background: rgba(255,200,168,.08); }
+    .compare-name {
+      font-family: var(--font-display); font-size: 1.2rem; font-weight: 500;
+      letter-spacing: -0.01em; white-space: nowrap; color: var(--ink);
+    }
+    .compare-estilo {
+      display: inline-block; font-size: 10px; letter-spacing: .16em;
+      text-transform: uppercase; padding: 3px 9px; border-radius: 100px;
+      font-weight: 600; white-space: nowrap;
+      background: rgba(155,171,143,.18); color: var(--sage-deep);
+    }
+    .compare-domain { font-family: 'SF Mono', Menlo, monospace; font-size: 12px; color: var(--ink-soft); white-space: nowrap; }
+    .modal-footer {
+      display: flex; gap: 10px;
+      padding: 16px 24px 20px; border-top: 1px solid var(--line);
+    }
+    .modal-footer button {
+      flex: 1; padding: 12px; border-radius: 10px;
+      border: 1px solid var(--line); background: var(--paper);
+      font-size: 13px; font-weight: 500; color: var(--ink);
+      cursor: pointer; font-family: var(--font-body); transition: all .2s;
+    }
+    .modal-footer button:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+    .compare-empty { text-align: center; padding: 60px 20px; color: var(--ink-mute); }
+    .compare-empty-text {
+      font-family: var(--font-display); font-style: italic;
+      font-size: 1.1rem; color: var(--ink-soft);
+    }
+
     /* ═══ MOBILE ═══ */
     @media (max-width: 720px) {
       .wrap { padding: 16px 16px 64px; }
@@ -366,6 +519,11 @@
       .results-actions .btn-ghost { flex: 1; justify-content: center; }
       h1 .rotator { min-width: 200px; }
       .mode-tab { padding: 8px 14px; font-size: 12px; }
+      .tone-bar { gap: 6px; padding-left: 14px; }
+      .tone-pill { padding: 7px 10px; font-size: 11px; }
+      .modal { max-height: 92vh; }
+      .compare-table th, .compare-table td { padding: 10px 8px; font-size: 12px; }
+      .compare-name { font-size: 1rem; }
     }
   </style>
 </head>
@@ -639,6 +797,16 @@
         </div>
       </div>
 
+      <!-- Selector de tono (compartido entre modos) -->
+      <div class="tone-bar" role="group" aria-label="Tono de la generación">
+        <span class="tone-label">Tono</span>
+        <div class="tone-pills" id="toneTempRow">
+          <button class="tone-pill" data-temp="0.6" type="button" title="Más predecible — prioriza estilos conocidos">Conservador</button>
+          <button class="tone-pill active" data-temp="1.0" type="button" title="Equilibrio entre variedad y familiaridad">Equilibrado</button>
+          <button class="tone-pill" data-temp="1.3" type="button" title="Más variedad — incluye nombres menos comunes">Original</button>
+        </div>
+      </div>
+
       <!-- Botón generar (compartido) -->
       <div class="actions">
         <button class="btn-primary" id="generateBtn" type="button">
@@ -658,6 +826,7 @@
       <div class="results-header">
         <h2 class="results-title">Diez <em>nombres</em> para tu negocio</h2>
         <div class="results-actions">
+          <button class="btn-ghost" id="resetExclusionsBtn" type="button" style="display:none" title="Permite que vuelvan a aparecer los nombres descartados">⟲ Olvidar descartados</button>
           <button class="btn-ghost" id="copyBtn" type="button">⎘ Copiar</button>
           <button class="btn-ghost" id="regenBtn" type="button">↻ Regenerar</button>
         </div>
@@ -672,19 +841,53 @@
     </footer>
   </div>
 
-  <!-- ═══ FAVORITES DRAWER ═══ -->
+  <!-- ═══ DRAWER (Favoritos + Historial) ═══ -->
   <div class="drawer-bg" id="drawerBg"></div>
   <aside class="drawer" id="drawer">
     <div class="drawer-header">
-      <div class="drawer-title">Nombres <em>guardados</em></div>
+      <div class="drawer-tabs">
+        <button class="drawer-tab active" data-tab="favs" type="button">
+          ♥ Favoritos <span class="drawer-tab-count" id="favCountTab">0</span>
+        </button>
+        <button class="drawer-tab" data-tab="history" type="button">
+          ⌛ Historial <span class="drawer-tab-count" id="historyCountTab">0</span>
+        </button>
+      </div>
       <button class="drawer-close" id="closeFav" type="button">✕</button>
     </div>
-    <div class="drawer-body" id="favList"></div>
-    <div class="drawer-footer">
-      <button id="copyFavs" type="button">Copiar lista</button>
-      <button class="danger" id="clearFavs" type="button">Limpiar todo</button>
+    <div class="drawer-body">
+      <div class="drawer-view active" id="favView">
+        <div id="favList"></div>
+      </div>
+      <div class="drawer-view" id="historyView">
+        <div id="historyList"></div>
+      </div>
+    </div>
+    <div class="drawer-footer" id="favFooter">
+      <button id="compareFavs" type="button">Comparar</button>
+      <button id="copyFavs" type="button">Copiar</button>
+      <button class="danger" id="clearFavs" type="button">Limpiar</button>
+    </div>
+    <div class="drawer-footer" id="historyFooter" style="display:none">
+      <button class="danger" id="clearHistory" type="button">Limpiar historial</button>
     </div>
   </aside>
+
+  <!-- ═══ COMPARE MODAL ═══ -->
+  <div class="modal-bg" id="compareModalBg">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="compareModalTitle">
+      <div class="modal-header">
+        <div class="modal-title" id="compareModalTitle">Compara tus <em>favoritos</em></div>
+        <button class="drawer-close" id="closeCompare" type="button">✕</button>
+      </div>
+      <div class="modal-body" id="compareBody"></div>
+      <div class="modal-footer">
+        <button id="copyCompare" type="button">Copiar como texto</button>
+        <button id="closeCompareFooter" type="button">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 
 <script>
@@ -694,6 +897,9 @@
 const GROQ_ENDPOINT = '/api/generate';
 const STORAGE_KEY = 'groq_api_key_baby_names';
 const FAVS_KEY = 'lumen_business_favorites';
+const SEEN_KEY = 'lumen_business_seen_names';
+const HISTORY_KEY = 'lumen_business_history';
+const TEMP_KEY = 'lumen_business_temperature';
 
 // ── System prompt: modo Describir ──
 const SP_DESCRIBE = `Eres un experto senior en branding, naming empresarial y estrategia de marca con más de 20 años creando nombres para startups, pymes y corporaciones globales.
@@ -711,6 +917,9 @@ CRITERIOS DE DIVERSIDAD — los 10 nombres en conjunto deben:
 - Incluir al menos 3 estilos distintos: Neologismo, Descriptivo, Acrónimo, Compuesto, Abstracto.
 - Variar en longitud: algunos cortos (1 sílaba/palabra), algunos medios, alguno más expresivo.
 - No empezar todos por la misma letra.
+
+EXCLUSIÓN OBLIGATORIA:
+Si el mensaje del usuario contiene una sección "NOMBRES YA SUGERIDOS", debes EXCLUIR esos nombres y también sus variantes ortográficas obvias (mayúsculas/minúsculas, con o sin acento, plural/singular). El usuario ya los ha visto y descartado; tu trabajo es ofrecer 10 alternativas frescas que no aparezcan en esa lista bajo ninguna circunstancia.
 
 REGLAS ESTRICTAS:
 1. Exactamente 10 nombres únicos.
@@ -743,6 +952,9 @@ FILTRO DE CALIDAD — cada nombre debe:
 2. Ser memorable y diferenciador — evita nombres genéricos.
 3. Ser potencialmente registrable como marca y dominio.
 4. Encajar con el tono, industria y cliente ideal descritos.
+
+EXCLUSIÓN OBLIGATORIA:
+Si el mensaje del usuario contiene una sección "NOMBRES YA SUGERIDOS", debes EXCLUIR esos nombres y también sus variantes ortográficas obvias (mayúsculas/minúsculas, con o sin acento, plural/singular). El usuario ya los ha visto y descartado; tu trabajo es ofrecer 10 alternativas frescas que no aparezcan en esa lista bajo ninguna circunstancia.
 
 REGLAS ESTRICTAS:
 1. Exactamente 10 nombres únicos.
@@ -813,6 +1025,100 @@ let selectedLang = null;
 let dSelectedTones = new Set();
 let dSelectedLen   = null;
 let dSelectedLang  = null;
+
+// Temperatura ajustable (Conservador / Equilibrado / Original)
+let currentTemperature = (() => {
+  const v = parseFloat(localStorage.getItem(TEMP_KEY));
+  return Number.isFinite(v) ? v : 1.0;
+})();
+
+// Acumula los nombres ya devueltos para la búsqueda actual.
+// Map<clave_normalizada, forma_original>. Persistimos por prompt en localStorage.
+let seenNames = new Map();
+
+function loadSeenStore() {
+  try { return JSON.parse(localStorage.getItem(SEEN_KEY)) || {}; }
+  catch { return {}; }
+}
+let seenStore = loadSeenStore();
+
+function saveSeenStore() {
+  try { localStorage.setItem(SEEN_KEY, JSON.stringify(seenStore)); } catch {}
+}
+
+function normalizeName(s) {
+  return String(s || '')
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '')
+    .trim();
+}
+
+function promptKey(p) {
+  return normalizeName(p).slice(0, 240);
+}
+
+function addSeenName(name) {
+  if (!name) return false;
+  const norm = normalizeName(name);
+  if (!norm || seenNames.has(norm)) return false;
+  seenNames.set(norm, name);
+  return true;
+}
+
+function loadSeenFor(prompt) {
+  seenNames = new Map();
+  (seenStore[promptKey(prompt)] || []).forEach(addSeenName);
+}
+
+function persistSeenFor(prompt) {
+  const key = promptKey(prompt);
+  if (!key) return;
+  if (seenNames.size === 0) delete seenStore[key];
+  else seenStore[key] = [...seenNames.values()];
+  saveSeenStore();
+}
+
+function clearSeenFor(prompt) {
+  seenNames.clear();
+  const key = promptKey(prompt);
+  if (key && seenStore[key]) { delete seenStore[key]; saveSeenStore(); }
+}
+
+function buildExclusionBlock() {
+  if (seenNames.size === 0) return '';
+  const list = [...seenNames.values()].join(', ');
+  return `\n\nNOMBRES YA SUGERIDOS (no los repitas ni propongas variantes ortográficas obvias; ofrece 10 alternativas completamente nuevas):\n${list}`;
+}
+
+// Historial de búsquedas
+let history = (() => {
+  try { return JSON.parse(localStorage.getItem(HISTORY_KEY)) || []; }
+  catch { return []; }
+})();
+
+function saveHistory() {
+  if (history.length > 30) history = history.slice(0, 30);
+  try { localStorage.setItem(HISTORY_KEY, JSON.stringify(history)); } catch {}
+  const tab = document.getElementById('historyCountTab');
+  if (tab) tab.textContent = history.length;
+}
+
+function pushHistory(userPrompt, systemPrompt, nombres) {
+  const mode = systemPrompt === SP_FORM ? 'form' : 'describe';
+  history = history.filter(h => !(h.prompt === userPrompt && h.mode === mode));
+  history.unshift({
+    id: Date.now(),
+    prompt: userPrompt,
+    mode,
+    nombres: nombres.map(n => ({
+      nombre: n.nombre, estilo: n.estilo,
+      concepto: n.concepto, dominio: n.dominio,
+    })),
+    timestamp: new Date().toISOString(),
+  });
+  saveHistory();
+}
 
 // ════════════════════════════════════════════════════════
 // API KEY
@@ -1021,12 +1327,13 @@ function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').re
 // GROQ API
 // ════════════════════════════════════════════════════════
 async function callGroq(prompt, sp) {
+  const finalPrompt = prompt + buildExclusionBlock();
   const res = await fetch(GROQ_ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      messages: [{ role: 'system', content: sp }, { role: 'user', content: prompt }],
-      temperature: 1.0, max_tokens: 2500,
+      messages: [{ role: 'system', content: sp }, { role: 'user', content: finalPrompt }],
+      temperature: currentTemperature, max_tokens: 2500,
       response_format: { type: 'json_object' }
     })
   });
@@ -1036,6 +1343,9 @@ async function callGroq(prompt, sp) {
     throw new Error(`Error de API (${res.status}).`);
   }
   const data = await res.json();
+  if (data._fallback) {
+    console.info(`[Lumen Business] Fallback de provider activado · respondió: ${data._provider}`);
+  }
   const content = data?.choices?.[0]?.message?.content;
   if (!content) throw new Error('Respuesta vacía. Intenta de nuevo.');
   let parsed;
@@ -1070,8 +1380,10 @@ function renderResults(nombres) {
       <div class="card-top">
         <span class="card-num">N.º ${String(i+1).padStart(2,'0')}</span>
         <div class="card-actions">
-          <button class="icon-btn speak-btn" data-name="${esc(n.nombre)}" aria-label="Pronunciar" type="button">🔊</button>
-          <button class="icon-btn fav-btn ${isFav?'faved':''}" data-idx="${i}" data-name="${esc(n.nombre)}" aria-label="Guardar" type="button">${isFav?'♥':'♡'}</button>
+          <button class="icon-btn speak-btn" data-name="${esc(n.nombre)}" aria-label="Pronunciar" title="Pronunciar" type="button">🔊</button>
+          <button class="icon-btn similar-btn" data-idx="${i}" aria-label="Más como este" title="Buscar nombres similares" type="button">✨</button>
+          <button class="icon-btn fav-btn ${isFav?'faved':''}" data-idx="${i}" data-name="${esc(n.nombre)}" aria-label="Guardar" title="Guardar en favoritos" type="button">${isFav?'♥':'♡'}</button>
+          <button class="icon-btn exclude-btn" data-idx="${i}" data-name="${esc(n.nombre)}" aria-label="Descartar" title="Descartar — no volverá a aparecer" type="button">✕</button>
         </div>
       </div>
       <div class="card-name">${esc(n.nombre)}</div>
@@ -1094,6 +1406,44 @@ function renderResults(nombres) {
       const nowFav = isFavorite(btn.dataset.name);
       btn.classList.toggle('faved', nowFav);
       btn.textContent = nowFav ? '♥' : '♡';
+    });
+  });
+
+  // Exclude buttons — añaden el nombre a seenNames y quitan la tarjeta del grid.
+  grid.querySelectorAll('.exclude-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const name = btn.dataset.name;
+      if (!name) return;
+      addSeenName(name);
+      if (lastPrompt) persistSeenFor(lastPrompt);
+      const card = btn.closest('.card');
+      if (card) {
+        card.classList.add('excluding');
+        setTimeout(() => { card.remove(); updateResetExclusionsBtn(); }, 280);
+      } else {
+        updateResetExclusionsBtn();
+      }
+      showToast(`${name} descartado · no volverá a aparecer`);
+    });
+  });
+
+  // "Más como este" — usa la tarjeta como semilla para una nueva búsqueda.
+  grid.querySelectorAll('.similar-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const idx = +btn.dataset.idx;
+      const seed = lastResults[idx];
+      if (!seed) return;
+      // Cambia visualmente a modo Describir (la semilla se ejecuta siempre con SP_DESCRIBE)
+      document.querySelectorAll('.mode-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === 'describe'));
+      $('modeDescribe').classList.add('active');
+      $('modeForm').classList.remove('active');
+      currentMode = 'describe';
+      const newPrompt = buildSimilarPrompt(seed);
+      descPrompt.value = newPrompt;
+      showToast(`Buscando nombres similares a ${seed.nombre}…`);
+      generate(newPrompt, SP_DESCRIBE);
     });
   });
 
@@ -1138,7 +1488,12 @@ function renderResults(nombres) {
 // FAVORITES
 // ════════════════════════════════════════════════════════
 function loadFavs() { try { return JSON.parse(localStorage.getItem(FAVS_KEY)) || []; } catch { return []; } }
-function saveFavs() { localStorage.setItem(FAVS_KEY, JSON.stringify(favorites)); favCountEl.textContent = favorites.length; }
+function saveFavs() {
+  localStorage.setItem(FAVS_KEY, JSON.stringify(favorites));
+  favCountEl.textContent = favorites.length;
+  const tab = document.getElementById('favCountTab');
+  if (tab) tab.textContent = favorites.length;
+}
 function isFavorite(name) { return favorites.some(f => f.nombre === name); }
 function toggleFavorite(n) {
   if (isFavorite(n.nombre)) { favorites = favorites.filter(f => f.nombre !== n.nombre); showToast(`${n.nombre} eliminado`); }
@@ -1168,7 +1523,11 @@ function renderFavList() {
     });
   });
 }
-function openDrawer() { drawer.classList.add('show'); drawerBg.classList.add('show'); renderFavList(); }
+function openDrawer() {
+  drawer.classList.add('show'); drawerBg.classList.add('show');
+  const activeTab = document.querySelector('.drawer-tab.active');
+  activateDrawerTab(activeTab ? activeTab.dataset.tab : 'favs');
+}
 function closeDrawer() { drawer.classList.remove('show'); drawerBg.classList.remove('show'); }
 openFavBtn.addEventListener('click', openDrawer);
 closeFavBtn.addEventListener('click', closeDrawer);
@@ -1184,14 +1543,232 @@ clearFavsBtn.addEventListener('click', () => {
 });
 
 // ════════════════════════════════════════════════════════
+// SIMILAR-NAME SEED PROMPT
+// ════════════════════════════════════════════════════════
+function buildSimilarPrompt(seed) {
+  const partes = [];
+  if (seed.estilo)   partes.push(`mismo estilo (${seed.estilo})`);
+  if (seed.concepto) partes.push(`concepto similar a "${seed.concepto.replace(/"/g,'')}"`);
+  const ctx = partes.length ? ` — ${partes.join(', ')}` : '';
+  return `Quiero más nombres de negocio similares a "${seed.nombre}"${ctx}. Que compartan sonoridad, longitud y tono, pero sin incluir "${seed.nombre}" en la respuesta. Mantén la calidad de naming y la viabilidad como marca y dominio.`;
+}
+
+// ════════════════════════════════════════════════════════
+// DRAWER TABS (Favoritos / Historial)
+// ════════════════════════════════════════════════════════
+const drawerTabs = document.querySelectorAll('.drawer-tab');
+const favView = $('favView');
+const historyView = $('historyView');
+const favFooter = $('favFooter');
+const historyFooter = $('historyFooter');
+const historyCountTab = $('historyCountTab');
+
+function activateDrawerTab(tab) {
+  drawerTabs.forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+  favView.classList.toggle('active', tab === 'favs');
+  historyView.classList.toggle('active', tab === 'history');
+  favFooter.style.display = tab === 'favs' ? 'flex' : 'none';
+  historyFooter.style.display = tab === 'history' ? 'flex' : 'none';
+  if (tab === 'history') renderHistoryList();
+  else renderFavList();
+}
+drawerTabs.forEach(t => t.addEventListener('click', () => activateDrawerTab(t.dataset.tab)));
+
+// ════════════════════════════════════════════════════════
+// HISTORY LIST
+// ════════════════════════════════════════════════════════
+function formatHistoryDate(iso) {
+  try {
+    const d = new Date(iso);
+    const diffMin = Math.floor((Date.now() - d) / 60000);
+    if (diffMin < 1)  return 'ahora mismo';
+    if (diffMin < 60) return `hace ${diffMin} min`;
+    const diffH = Math.floor(diffMin / 60);
+    if (diffH < 24)   return `hace ${diffH} h`;
+    const diffD = Math.floor(diffH / 24);
+    if (diffD < 7)    return `hace ${diffD} d`;
+    return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+  } catch { return ''; }
+}
+
+function renderHistoryList() {
+  const list = $('historyList');
+  if (history.length === 0) {
+    list.innerHTML = `<div class="fav-empty"><div class="fav-empty-icon">⌛</div><p class="fav-empty-text">Aún no has buscado nombres.<br/>Tu historial aparecerá aquí.</p></div>`;
+    return;
+  }
+  list.innerHTML = history.map((h, i) => {
+    const names = h.nombres.map(n => n.nombre).join(' · ');
+    const label = h.mode === 'form' ? 'Formulario' : 'Describir';
+    return `
+      <div class="history-item" data-idx="${i}">
+        <div class="history-meta">
+          <span class="history-mode-badge ${h.mode}">${label}</span>
+          <span>${formatHistoryDate(h.timestamp)}</span>
+        </div>
+        <div class="history-prompt" data-action="view" data-idx="${i}">${esc(h.prompt)}</div>
+        <div class="history-names">${esc(names)}</div>
+        <div class="history-actions">
+          <button data-action="view" data-idx="${i}" type="button">Ver nombres</button>
+          <button data-action="regen" data-idx="${i}" type="button">Volver a buscar</button>
+          <button data-action="delete" data-idx="${i}" type="button">Quitar</button>
+        </div>
+      </div>`;
+  }).join('');
+
+  list.querySelectorAll('[data-action]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const idx = +el.dataset.idx;
+      const entry = history[idx];
+      if (!entry) return;
+      const action = el.dataset.action;
+      if (action === 'view') {
+        lastResults = entry.nombres;
+        lastPrompt = entry.prompt;
+        lastSP = entry.mode === 'form' ? SP_FORM : SP_DESCRIBE;
+        loadSeenFor(entry.prompt);
+        entry.nombres.forEach(n => addSeenName(n.nombre));
+        persistSeenFor(entry.prompt);
+        renderResults(entry.nombres);
+        updateResetExclusionsBtn();
+        closeDrawer();
+      } else if (action === 'regen') {
+        const sp = entry.mode === 'form' ? SP_FORM : SP_DESCRIBE;
+        closeDrawer();
+        generate(entry.prompt, sp);
+      } else if (action === 'delete') {
+        history.splice(idx, 1);
+        saveHistory();
+        renderHistoryList();
+      }
+    });
+  });
+}
+
+$('clearHistory').addEventListener('click', () => {
+  if (!history.length) return;
+  if (confirm('¿Vaciar todo el historial de búsquedas?')) {
+    history = [];
+    saveHistory();
+    renderHistoryList();
+  }
+});
+
+// ════════════════════════════════════════════════════════
+// COMPARE FAVORITES MODAL
+// ════════════════════════════════════════════════════════
+const compareModalBg = $('compareModalBg');
+const compareBody    = $('compareBody');
+
+function openCompare() {
+  if (!favorites.length) {
+    compareBody.innerHTML = `<div class="compare-empty"><div class="fav-empty-icon">♡</div><p class="compare-empty-text">Marca algunos nombres como favoritos<br/>para compararlos aquí.</p></div>`;
+  } else {
+    compareBody.innerHTML = `
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Estilo</th>
+            <th>Concepto</th>
+            <th>Dominio</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${favorites.map(f => `
+            <tr>
+              <td><div class="compare-name">${esc(f.nombre)}</div></td>
+              <td><span class="compare-estilo">${esc(f.estilo || '—')}</span></td>
+              <td>${esc(f.concepto || '—')}</td>
+              <td><span class="compare-domain">${esc(f.dominio || '—')}</span></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>`;
+  }
+  compareModalBg.classList.add('show');
+}
+function closeCompare() { compareModalBg.classList.remove('show'); }
+
+$('compareFavs').addEventListener('click', () => {
+  if (!favorites.length) return showToast('Aún no tienes favoritos para comparar');
+  openCompare();
+});
+$('closeCompare').addEventListener('click', closeCompare);
+$('closeCompareFooter').addEventListener('click', closeCompare);
+compareModalBg.addEventListener('click', (e) => { if (e.target === compareModalBg) closeCompare(); });
+$('copyCompare').addEventListener('click', () => {
+  if (!favorites.length) return;
+  const lines = favorites.map(f =>
+    `• ${f.nombre} (${f.estilo || '—'}) — ${f.dominio || '—'} · ${f.concepto || '—'}`
+  );
+  navigator.clipboard.writeText(lines.join('\n')).then(
+    () => showToast('Comparación copiada'),
+    () => showError('No se pudo copiar al portapapeles.')
+  );
+});
+
+// ════════════════════════════════════════════════════════
+// RESET EXCLUSIONS — visible cuando hay descartados que no aparecen en pantalla
+// ════════════════════════════════════════════════════════
+const resetExclusionsBtn = $('resetExclusionsBtn');
+function updateResetExclusionsBtn() {
+  if (!resetExclusionsBtn) return;
+  const visible = grid.querySelectorAll('.card:not(.excluding)').length;
+  const descartados = Math.max(0, seenNames.size - visible);
+  if (descartados > 0) {
+    resetExclusionsBtn.style.display = '';
+    resetExclusionsBtn.innerHTML = `⟲ Olvidar ${descartados} descartado${descartados !== 1 ? 's' : ''}`;
+  } else {
+    resetExclusionsBtn.style.display = 'none';
+  }
+}
+resetExclusionsBtn.addEventListener('click', () => {
+  if (!lastPrompt) return;
+  clearSeenFor(lastPrompt);
+  updateResetExclusionsBtn();
+  showToast('Exclusiones reiniciadas · los nombres descartados pueden volver');
+});
+
+// ════════════════════════════════════════════════════════
+// TONE BAR — selector de temperatura
+// ════════════════════════════════════════════════════════
+function initToneBar() {
+  const toneRow = $('toneTempRow');
+  if (!toneRow) return;
+  const pills = toneRow.querySelectorAll('.tone-pill');
+  pills.forEach(p => {
+    const t = parseFloat(p.dataset.temp);
+    p.classList.toggle('active', Math.abs(t - currentTemperature) < 1e-6);
+  });
+  pills.forEach(p => {
+    p.addEventListener('click', () => {
+      const t = parseFloat(p.dataset.temp);
+      if (!Number.isFinite(t)) return;
+      currentTemperature = t;
+      try { localStorage.setItem(TEMP_KEY, String(t)); } catch {}
+      pills.forEach(o => o.classList.remove('active'));
+      p.classList.add('active');
+    });
+  });
+}
+
+// ════════════════════════════════════════════════════════
 // MAIN FLOW
 // ════════════════════════════════════════════════════════
 async function generate(prompt, sp) {
   hideError(); setLoading(true);
+  // Si el prompt base cambió, carga las exclusiones persistidas para ese prompt.
+  if (prompt !== lastPrompt) loadSeenFor(prompt);
   try {
     const nombres = await callGroq(prompt, sp);
+    nombres.forEach(n => addSeenName(n && n.nombre));
+    persistSeenFor(prompt);
     lastPrompt = prompt; lastSP = sp; lastResults = nombres;
     renderResults(nombres);
+    pushHistory(prompt, sp, nombres);
+    updateResetExclusionsBtn();
   } catch (err) { showError(err.message); console.error(err); }
   finally { setLoading(false); }
 }
@@ -1225,7 +1802,11 @@ generateBtn.addEventListener('click', () => {
   }
 });
 
-regenBtn.addEventListener('click', () => { if (lastPrompt) generate(lastPrompt, lastSP); });
+regenBtn.addEventListener('click', () => {
+  if (!lastPrompt) return;
+  if (seenNames.size > 0) showToast(`Buscando 10 nuevos · excluyendo ${seenNames.size} ya vistos`);
+  generate(lastPrompt, lastSP);
+});
 copyBtn.addEventListener('click', () => {
   if (!lastResults.length) return;
   const t = lastResults.map((n,i) => `${i+1}. ${n.nombre} (${n.estilo}) — ${n.dominio || ''}\n   ${n.concepto}`).join('\n\n');
@@ -1237,7 +1818,11 @@ descPrompt.addEventListener('keydown', e => { if ((e.metaKey||e.ctrlKey) && e.ke
 document.querySelectorAll('#modeForm input, #modeForm textarea').forEach(el => {
   el.addEventListener('keydown', e => { if ((e.metaKey||e.ctrlKey) && e.key === 'Enter') { e.preventDefault(); generateBtn.click(); } });
 });
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && drawer.classList.contains('show')) closeDrawer(); });
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  if (compareModalBg.classList.contains('show')) { closeCompare(); return; }
+  if (drawer.classList.contains('show')) closeDrawer();
+});
 
 // ════════════════════════════════════════════════════════
 // DARK MODE
@@ -1269,6 +1854,8 @@ themeBtn.addEventListener('click', () => {
 initTheme();
 loadKey();
 saveFavs();
+initToneBar();
+if (historyCountTab) historyCountTab.textContent = history.length;
 </script>
 </body>
 </html>
